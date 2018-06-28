@@ -1,0 +1,28 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>{{title}}</title>
+    <!-- Bootstrap & JQuery -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="js/jquery-3.3.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+    {# 注释 #}
+
+    {# 头部导航栏 #}
+    {% include "./include/header.html"%}
+    
+    {# 消息栏（默认隐藏） #}
+    {% include "./include/message.html"%}
+
+    {# 主题内容 #}
+    {% include "./include/main.html"%}
+
+    {# 底部导航栏 #}
+    {% include "./include/footer.html"%}
+ 
+</body>
+</html>
