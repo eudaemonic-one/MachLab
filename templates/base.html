@@ -2,14 +2,18 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8" />
     <title>{{title}}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta itemprop="screenshot" content="http://localhost:7000/home-screenshot-mac-lg.png">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <!-- Bootstrap & JQuery -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <script src="js/jquery-3.3.1.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
 </head>
-<body>
+<body class="home win">
     {# 注释 #}
 
     {# 头部导航栏 #}
@@ -23,6 +27,5 @@
 
     {# 底部导航栏 #}
     {% include "./include/footer.html"%}
- 
 </body>
 </html>

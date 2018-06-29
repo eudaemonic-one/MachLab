@@ -49,11 +49,16 @@
     <Content Include="static\css\bootstrap.css.map" />
     <Content Include="static\css\bootstrap.min.css" />
     <Content Include="static\css\bootstrap.min.css.map" />
+    <Content Include="static\css\style.css" />
     <Content Include="static\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="static\icons\download.svg" />
+    <Content Include="static\icons\search.svg" />
+    <Content Include="static\icons\search_dark.svg" />
+    <Content Include="static\img\logo.png" />
     <Content Include="static\js\bootstrap.js" />
     <Content Include="static\js\bootstrap.min.js" />
     <Content Include="static\js\jquery-3.3.1.js" />
@@ -68,6 +73,7 @@
     <Content Include="templates\include\main.html" />
     <Content Include="templates\include\message.html" />
     <Content Include="templates\index.html" />
+    <Content Include="templates\Search.html" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="MachLab\" />
@@ -78,6 +84,7 @@
     <Folder Include="static\img\" />
     <Folder Include="static\js\" />
     <Folder Include="static\media\" />
+    <Folder Include="static\icons\" />
     <Folder Include="templates\" />
     <Folder Include="templates\account\" />
     <Folder Include="templates\admin\" />

@@ -125,3 +125,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
+
+STATICFILES_DIRS = (
+    # os.path.join(BASE_DIR,STATIC_URL),
+    ('css',os.path.join(STATIC_ROOT,'css').replace('\\','/') ),
+    ('js',os.path.join(STATIC_ROOT,'js').replace('\\','/') ),
+    ('img',os.path.join(STATIC_ROOT,'img').replace('\\','/') ),
+    ('icons',os.path.join(STATIC_ROOT,'icons').replace('\\','/') ),
+    ('media',os.path.join(STATIC_ROOT,'media').replace('\\','/') )
+)
