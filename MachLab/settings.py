@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'Account',
+    'Docs'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -56,10 +58,12 @@ MIDDLEWARE_CLASSES = [
 
 ROOT_URLCONF = 'MachLab.urls'
 
+LOGIN_URL= '/account/login/'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR+"/templates",],
+        'DIRS': [os.path.join(BASE_DIR,'templates').replace('\\', '/'),], #BASE_DIR+"/templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

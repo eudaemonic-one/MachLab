@@ -29,6 +29,32 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Account\admin.py" />
+    <Compile Include="Account\apps.py" />
+    <Compile Include="Account\migrations\__init__.py" />
+    <Compile Include="Account\models.py" />
+    <Compile Include="Account\tests.py" />
+    <Compile Include="Account\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Account\views.py" />
+    <Compile Include="Account\__init__.py" />
+    <Compile Include="Docs\admin.py" />
+    <Compile Include="Docs\apps.py" />
+    <Compile Include="Docs\migrations\__init__.py" />
+    <Compile Include="Docs\models.py" />
+    <Compile Include="Docs\tests.py" />
+    <Compile Include="Docs\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Docs\views.py" />
+    <Compile Include="Docs\__init__.py" />
+    <Compile Include="MachLab\admin.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MachLab\models.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="MachLab\view.py" />
     <Compile Include="manage.py" />
     <Compile Include="MachLab\__init__.py" />
@@ -37,6 +63,14 @@
     <Compile Include="MachLab\wsgi.py" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Account\templates\profile.html" />
+    <Content Include="Docs\templates\docs.html" />
+    <Content Include="Docs\templates\include\docs-overview.html" />
+    <Content Include="Docs\templates\faq.html" />
+    <Content Include="Docs\templates\include\docs-navbar.html" />
+    <Content Include="Docs\templates\overview.html" />
+    <Content Include="Docs\templates\setup.html" />
+    <Content Include="Docs\templates\userguide.html" />
     <Content Include="requirements.txt" />
     <Content Include="requirements\common.txt" />
     <Content Include="requirements\dev.txt" />
@@ -55,27 +89,41 @@
     <Content Include="static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="static\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="static\icons\expand-down.svg" />
     <Content Include="static\icons\download.svg" />
     <Content Include="static\icons\search.svg" />
     <Content Include="static\icons\search_dark.svg" />
+    <Content Include="static\icons\expand-up.svg" />
+    <Content Include="static\img\linux-logo.png" />
     <Content Include="static\img\logo.png" />
+    <Content Include="static\img\mac-logo.svg" />
+    <Content Include="static\img\windows-logo.png" />
     <Content Include="static\js\bootstrap.js" />
     <Content Include="static\js\bootstrap.min.js" />
     <Content Include="static\js\jquery-3.3.1.js" />
     <Content Include="static\js\npm.js" />
-    <Content Include="templates\account\login.html" />
-    <Content Include="templates\account\lost-password.html" />
-    <Content Include="templates\account\register.html" />
+    <Content Include="Account\templates\login.html" />
+    <Content Include="Account\templates\lost-password.html" />
+    <Content Include="Account\templates\register.html" />
+    <Content Include="static\js\runScript.js" />
     <Content Include="templates\admin\admin.html" />
     <Content Include="templates\base.html" />
+    <Content Include="templates\download.html" />
     <Content Include="templates\include\footer.html" />
     <Content Include="templates\include\header.html" />
     <Content Include="templates\include\main.html" />
     <Content Include="templates\include\message.html" />
     <Content Include="templates\index.html" />
-    <Content Include="templates\Search.html" />
+    <Content Include="templates\search.html" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Account\" />
+    <Folder Include="Account\migrations\" />
+    <Folder Include="Account\templates\" />
+    <Folder Include="Docs\" />
+    <Folder Include="Docs\migrations\" />
+    <Folder Include="Docs\templates\" />
+    <Folder Include="Docs\templates\include\" />
     <Folder Include="MachLab\" />
     <Folder Include="requirements\" />
     <Folder Include="static\" />
@@ -86,7 +134,6 @@
     <Folder Include="static\media\" />
     <Folder Include="static\icons\" />
     <Folder Include="templates\" />
-    <Folder Include="templates\account\" />
     <Folder Include="templates\admin\" />
     <Folder Include="templates\include\" />
   </ItemGroup>

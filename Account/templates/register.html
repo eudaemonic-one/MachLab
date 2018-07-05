@@ -1,0 +1,53 @@
+﻿{% extends "base.html" %}
+
+{% block message %}
+{% endblock %}
+
+{% block main %}
+<div class="register-main main">
+    <div class="register-container">
+        <div class="register">
+            <div class="register-form-header-wrapper">
+                <div class="register-form-header">登录到您的账户</div>
+                {% if alreadyRegistered %}
+                    <div class="register-form-error">注册失败！该用户已被注册！请尝试登录到<a href="{% url 'login'%}">MachLab</a>！</div>
+                {% endif %}
+            </div>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="card register-form">
+                    <div class="field register-form-email">
+                        <label for="id_email">电子邮件地址</label>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+                    <div class="field register-form-username">
+                        <label for="id_username">用户名</label>
+                        {{ form.username }}
+                        {{ form.username.errors }}
+                    </div>
+                    <div class="field register-form-password">
+                        <label for="id_password">密码</label>
+                        {{ form.password }}
+                        {{ form.password.errors }}
+                    </div>
+                    <!--<p class="register-form-terms">继续选择以下任意选项即表示您同意
+                        <a href="" target="_blank" rel="noopener noreferrer">服务条款</a>
+                    </p>-->
+                    <div class="register-form-action">
+                        <button type="submit" class="button form-button is-primary">注册</button>
+                    </div>
+                    <div class="register-form-next">
+                        <input type="hidden" name="next" value="/" />
+                    </div>
+                </div>
+                <div class="register-links">
+                    <a href="{% url 'login'%}" rel="external">登录</a>
+                    <a href="{% url 'index'%}" rel="external" class="logged-out-form-back-link">←返回 MachLab 首页</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

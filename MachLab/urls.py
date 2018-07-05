@@ -9,13 +9,18 @@ admin.autodiscover()
 
 urlpatterns = [
     # Admin Console Panel #
-    url('admin/', admin.site.urls),
-    url('admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/', admin.site.urls),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     
     # Website Pages #
-    url('', view.index),
-    url('index/', view.index),
+    url(r'^$', view.index, name='index'),
 
-    # Model Lab#
-    #url('ModelLab/', include('MachLab.ModelLab.urls')),
+    # Account Pages #
+    url(r'account/', include('Account.urls')),
+
+    # Docs Pages #
+    url(r'docs/', include('Docs.urls')),
+
+    # Download Pages #
+    url(r'download/', view.download, name='download'),
 ]

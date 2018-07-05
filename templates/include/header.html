@@ -1,44 +1,51 @@
-﻿{% block header %}
-    <div class="navbar-fixed-container">
-        <div class="navbar navbar-inverse navbar-fixed-top affix-top" data-spy="affix" data-offset-top="1">
-            <nav role="navigation">
-          	    <div class="container">
-          	        <div class="nav navbar-header">
-          	            <a class="navbar-brand" href="/"><span itemprop="name">Mach Lab</span></a>
-          	        </div>
-          	        <div class="navbar-collapse collapse">
-          	            <ul class="nav navbar-nav navbar-left">
-          	                <li><a id="nav-docs" href="/docs">Docs</a></li>
-          	                <li><a id="nav-updates" href="/models">Models</a></li>
-          	                <li><a id="nav-community" href="/community">Community</a></li>
-          	                <li><a id="nav-faqs" href="/docs/supporting/faq">FAQ</a></li>
-          	                <li class="search visible-xs"><a href="/search">Search</a></li>
-          	            </ul>
-          	
-          	            <ul class="nav navbar-nav navbar-right">
-          	                <li class="search">
-          	                    <form class="nav-search search-form">
-          	                        <div class="input-group">
-          	                            <input name="q" class="search-box form-control" placeholder="Search Models" type="text">
-          	                            <span class="input-group-btn">
-          	                                <button tabindex="0" class="btn" type="submit" aria-label="Search">
-          	                                        <img class="search-icon" src="/static/icons/search.svg" alt="Search" width="16px" height="16px">
-          	                                </button>
-          	                            </span>
-          	                        </div>
-          	                    </form>	                    
-                            </li>
-          	                <!-- this was hiden in the home and download page, keeping it for now -->
-          	                <li>
-                              <a itemprop="downloadUrl" class="link-button" href="/download" id="nav-download">
-                                  <img class="download-icon" src="/static/icons/download.svg" alt="Download Mach Lab" width="16px" height="16px">
-                                  <span class="hidden-sm">Download</span>
-                              </a>
-                            </li>
-          	            </ul>
-          	        </div>
+﻿
+<a role="button" id="skip-to-content" class="link-button" href="#main-content">Skip to content<i>&nbsp;</i><span class="glyphicon glyphicon-menu-down"></span></a>
+<div class="navbar-fixed-container">
+    <div class="navbar navbar-inverse navbar-fixed-top affix-top" data-spy="affix" data-offset-top="1">
+        <nav role="navigation">
+          	<div class="container">
+          	    <div class="nav navbar-header">
+          	        <a class="navbar-brand" href="/"><span itemprop="name">Mach Lab</span></a>
           	    </div>
-            </nav>
-        </div>
+          	    <div class="navbar-collapse collapse">
+          	        <ul class="nav navbar-nav navbar-left">
+          	            <li><a id="nav-docs" href="/docs">Docs</a></li>
+          	            <li><a id="nav-updates" href="/models">Models</a></li>
+          	            <li><a id="nav-faqs" href="/docs/supporting/faq">FAQ</a></li>
+          	            <!--<li class="search visible-xs"><a href="/search">Search</a></li>-->
+          	        </ul>
+          	
+          	        <ul class="nav navbar-nav navbar-right">
+          	            <li class="search">
+          	                <form class="nav-search search-form">
+          	                    <div class="input-group">
+          	                        <input name="q" class="search-box form-control" placeholder="Search Models" type="text">
+          	                        <span class="input-group-btn">
+          	                            <button tabindex="0" class="btn" type="submit" aria-label="Search">
+          	                                    <img class="search-icon" src="/static/icons/search.svg" alt="Search" width="16px" height="16px">
+          	                            </button>
+          	                        </span>
+          	                    </div>
+          	                </form>	                    
+                        </li>
+          	            <!-- this was hiden in the home and download page, keeping it for now -->
+          	            <li>
+                            <a itemprop="downloadUrl" class="link-button" href="/download" id="nav-download">
+                                <img class="download-icon" src="/static/icons/download.svg" alt="Download Mach Lab" width="16px" height="16px">
+                                <span class="hidden-sm">Download</span>
+                            </a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li><a id="nav-username" href="/account/profile/">{{ request.user.username }}，您好！</a></li>
+          	                <li><a id="nav-logout" href="/account/logout/">Logout</a></li>
+                        {% else %}
+          	                <li><a id="nav-login" href="/account/login/">Signin</a></li>
+          	                <li><a id="nav-register" href="/account/register/">Signup</a></li>
+                        {% endif %}
+          	        </ul>
+          	    </div>
+          	</div>
+        </nav>
     </div>
-{% endblock %}
+</div>
+    

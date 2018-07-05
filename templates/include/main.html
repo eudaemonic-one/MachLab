@@ -1,3 +1,127 @@
-﻿{% block main %}
-    <p>main</p>
-{% endblock %}
+﻿<div class="jumbotron home">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 copy">
+                <h1>Machine Learning. <strong>Laboratory.</strong></h1>
+                <div class="lead">
+                    <p>
+                        <span itemprop="offers" itemscope="" itemtype="http://schema.org/Offer">
+                            <span itemprop="description">Free</span>.
+                            <meta itemprop="price" content="0">
+                            <meta itemprop="priceCurrency" content="USD">
+                        </span> Open source. Runs everywhere.</p>
+                </div>
+
+                <div id="download-buttons" class="download-hero alt-downloads win">
+                    <!-- Download for user's current OS -->
+                    <div class="primary-buttons">
+                        <button class="link-button dlink" data-os="win">Download for Windows<small class="build-type">Stable Build</small></button>
+                        <!--<div class="linux">
+                            <div class="flex-box">
+                                <button class="link-button dlink" data-os="linux64_deb"><img src="/assets/icons/download.svg" width="18px" height="18px" alt="Download VS Code">.deb<small>Debian, Ubuntu...</small></button>
+                                <button class="link-button dlink" data-os="linux64_rpm_repo"><img src="/assets/icons/download.svg" width="18px" height="18px" alt="Download VS Code">.rpm<small>Red Hat, Fedora...</small></button>
+                            </div>
+                            <div class="collapse" id="linux32-downloads-insiders">
+                                <ul class="list-unstyled text-center">
+                                    <li><a id="home-deb-download-link" class="dlink" data-os="linux32_deb"><strong>.deb</strong> (32 bit)</a></li>
+                                    <li><a id="home-rpm-download-link" class="dlink" data-os="linux32_rpm"><strong>.rpm</strong> (32 bit)</a></li>
+                                    <li><a id="home-zip-download-link" class="dlink" data-os="linux32"><strong>.tar.gz</strong> (32 bit)</a></li>
+                                </ul>
+                            </div>
+                        </div>-->
+                        <a class="link-button other-os" href="/Download">Download<small class="build-type">Stable Build</small></a>
+                    </div>
+                    <button id="download-dropdown" class="link-button download-dropdown" type="button" aria-haspopup="true" aria-labelledby="download-matrix-label"></button>
+                    <p id="download-matrix-label" class="subtext text-center"><a href="#alt-downloads">Other platforms</a> and <a href="#alt-downloads">Latest Edition</a>
+                    </p>
+                    <p class="terms">By using MachLab, you will enter into <span class="wrap-together"><a id="home-terms-link" href="{% url 'docs' %}">the fantasy world</a>.</span></p>
+                </div>            
+            </div>
+            <!--
+            <div class="col-md-8">
+                <div class="screenshot"></div>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
+
+<div class="value-props">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 col-xs-6"><a class="value-prop" id="home-value-prop-intellisense-link" href="#meet-intellisense"><div class="value-prop-icon intellisense"></div>IntelliSense</a></div>
+            <div class="col-sm-3 col-xs-6"><a class="value-prop" id="home-value-prop-debugging-link" href="#powerful-debugging"><div class="value-prop-icon debugging"></div>Debugging</a></div>
+            <div class="col-sm-3 col-xs-6"><a class="value-prop" id="home-value-prop-git-link" href="#built-in-git"><div class="value-prop-icon git"></div>Built-in Git</a></div>
+            <div class="col-sm-3 col-xs-6"><a class="value-prop" id="home-value-prop-extensions-link" href="#hundreds-of-extensions"><div class="value-prop-icon extensions-icon"></div>Extensions</a></div>
+        </div>
+    </div>
+</div>
+
+<div class="swimlane-container">
+    <div class="swimlane getting-started">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 vscode-for">
+                    <h2>Mach Lab for</h2>
+                </div>
+                <div class="col-sm-6 home-languages-list-parent">
+                    <div class="mask"></div>
+                    <div class="supported-languages-list">
+                        <ul data-reactroot="">
+                            <li>Python</li>
+                            <li>Pytorch</li>
+                            <li>Keras</li>
+                            <li>C++</li>
+                            <li>Tensorflow</li>
+                            <li>CNTK</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row caption">
+                <div class="col-sm-12">
+                    <a id="home-get-started-now-link" class="link-button" href="/docs">Get Started Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="alt-downloads" class="swimlane alt-downloads download-buttons win">
+        <div class="buttons">
+            <div class="download">
+                <div class="logo windows"></div>
+                <button class="link-button dlink" data-os="win" aria-label="Windows download" role="link">
+                    <img class="download-icon" src="/static/icons/download.svg" alt="Download MachLab" width="18px" height="18px">
+                    <img class="download-icon-accessible" src="/static/icons/download.svg" alt="Download MachLab" width="18px" height="18px">
+                    Windows<small>Windows 7, 8, 10</small>
+                </button>
+            </div>
+            <div class="download">
+                <div class="logo linux"></div>
+                <button class="link-button dlink" data-os="linux64_deb" aria-label="Linux Debian Ubuntu download" role="link">
+                    <img class="download-icon" src="/static/icons/download.svg" alt="Download MachLab" width="18px" height="18px">
+                    <img class="download-icon-accessible" src="/static/icons/download.svg" alt="Download MachLab" width="18px" height="18px">
+                    .deb<small>Debian, Ubuntu</small>
+                </button>
+                <button class="link-button dlink" data-os="linux64_rpm" aria-label="Linux Red Hat Fedora SUSE download" role="link">
+                    <img class="download-icon" src="/static/icons/download.svg" alt="Download MachLab" width="18px" height="18px">
+                    <img class="download-icon-accessible" src="/static/icons/download.svg" alt="Download MachLab" width="18px" height="18px">
+                    .rpm<small>Red Hat, Fedora, SUSE</small>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="alt-downloads swimlane-container insiders-callout">
+        <div class="swimlane">
+            <div class="container">
+                <div class="row">
+                    <div class="terms text-center">
+                        <h2 class="faux-h3">Want new features sooner?</h2>
+                        <p class="call-to-action">Get the <a href="#alt-downloads">Latest build</a> instead.</p>
+                        <p>&nbsp;</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

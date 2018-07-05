@@ -1,0 +1,26 @@
+﻿<div class="col-md-2 docs-navbar-container">
+    <nav id="docs-navbar" class="docs-nav visible-md visible-lg">
+	    <ul class="nav" id="main-nav">
+		    <li><a class="docs-home" href="{% url 'overview' %}">Overview</a></li>
+
+		    <li class="panel collapsed">
+			    <a class="area collapsed" href="#setup-articles" data-parent="#main-nav" data-toggle="collapse">Setup</a>
+			    <ul id="setup-articles" class="collapse" data-parent="#main-nav">
+				    <li><a href="{% url 'setup' %}/#setup-windows">Windows</a></li>
+				    <li><a href="{% url 'setup' %}/#setup-linux">Linux</a></li>
+			    </ul>
+		    </li>
+
+            <li class="panel collapsed">
+				<a class="area collapsed" href="#userguide-articles" data-parent="#main-nav" data-toggle="collapse">User Guide</a>
+				<ul id="userguide-articles" class="collapse" data-parent="#main-nav">
+					<li><a href="{% url 'userguide' %}/#userguide-intro">Intro</a></li>
+					<li><a href="{% url 'userguide' %}/#userguide-basic-running">Basic Running</a></li>
+					<li><a href="{% url 'userguide' %}/#userguide-extension">Extension</a></li>
+					<li><a href="{% url 'userguide' %}/#userguide-data">Data</a></li>
+					<li><a href="{% url 'userguide' %}/#userguide-accessibility">Accessibility</a></li>
+				</ul>
+			</li>
+	    </ul>
+    </nav>
+</div>

@@ -450,6 +450,7 @@ iframe[name='google_conversion_frame'] {
     }
 
 .updates-banner {
+    top: 0;
     background-color: #e3e3e3;
     color: #1e1e1e;
     font-size: 1.6rem;
@@ -1055,21 +1056,21 @@ footer {
 }
 
     .alt-downloads .logo.windows {
-        background: url("/assets/images/windows-logo.png") center center no-repeat
+        background: url("/static/img/windows-logo.png") center center no-repeat
     }
 
     .alt-downloads .logo.mac {
-        background: url("/assets/images/apple-logo.svg") center center no-repeat
+        background: url("/static/img/mac-logo.svg") center center no-repeat
     }
 
 @media screen and (-ms-high-contrast: white-on-black) {
     .alt-downloads .logo.mac {
-        background-image: url("/assets/images/apple-logo-inverted.svg")
+        background-image: url("/static/img/linux-logo.png")
     }
 }
 
 .alt-downloads .logo.linux {
-    background: url("/assets/images/linux-logo.png") center center no-repeat
+    background: url("/static/img/linux-logo.png") center center no-repeat
 }
 
 .alt-downloads .link-button {
@@ -2943,12 +2944,12 @@ body.linux #node-screenshot .screenshot {
     }
 
     #docs-navbar .nav .panel.expanded > a:hover {
-        background: url("/expand-up.svg") 110px 5px no-repeat;
+        background: url("/static/icons/expand-up.svg") 110px 5px no-repeat;
         background-size: 24px
     }
 
     #docs-navbar .nav .panel.collapsed > a:hover {
-        background: url("/expand-down.svg") 110px 5px no-repeat;
+        background: url("/static/icons/expand-down.svg") 110px 5px no-repeat;
         background-size: 24px
     }
 
