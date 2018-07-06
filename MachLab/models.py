@@ -4,26 +4,11 @@ from django.contrib.auth.models import User
 
 class Userinfo(models.Model):
     user = models.OneToOneField(User)
-    bio = models.CharField(max_length=256)
-    url = models.URLField(max_length=256)
-    location = models.CharField(max_length=32)
-    avatar = models.FileField(upload_to='avatar/')
+    bio = models.CharField(max_length=256, blank=True, null=True)
+    url = models.URLField(max_length=256, blank=True, null=True)
+    location = models.CharField(max_length=32, blank=True, null=True)
+    avatar = models.FileField(upload_to='avatar/', blank=True, null=True)
     register_datetime = models.DateField(auto_now_add=True)
-
-    def get_bio(self):
-        return self.bio
-
-    def get_url(self):
-        return self.url
-
-    def get_location(self):
-        return self.location
-    
-    def get_avatar(self):
-        return self.avatar
-      
-    def get_registered_date(self):
-        return self.registered_date
     
 class MyUserManager(BaseUserManager):
     def create_user(self, username, email, password):

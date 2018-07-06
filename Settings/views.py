@@ -16,7 +16,7 @@ class ProfileForm(forms.Form):
     bio = forms.CharField(max_length=256)
     url = forms.URLField(max_length=256)
     location = forms.CharField(max_length=32)
-    avatar = forms.ImageField()
+    avatar = forms.ImageField(allow_empty_file=True)
 
     def set_initial_fields(self, user=None):
         if user:
@@ -38,10 +38,11 @@ class ProfileForm(forms.Form):
 def profile(request):
     context = {}
     context['title'] = '个人信息概览 | MachLab'
-    redirect_to = request.POST.get('next')
+    redirect_to = request.POST.get('next', request.GET.get('next',''))
     if request.method == 'POST':
-        form = ProfileForm(request.POST)
+        form = ProfileForm(request.POST, request.FILES)
         context['form'] = form
+        avatar = request.FILES['avatar']
         if form.is_valid():
             cd = form.cleaned_data
             username = cd['username']
@@ -49,7 +50,6 @@ def profile(request):
             bio = cd['bio']
             url = cd['url']
             location = cd['location']
-            avatar = cd['avatar']
             try:
                 user = User.objects.get(username=request.user.username)
                 if username:
@@ -82,6 +82,7 @@ class AccountForm(forms.Form):
     newpassword = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput())
     confirmpassword = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput())
  
+@login_required
 def account(request):
     context = {}
     context['title'] = '账户信息概览 | MachLab'

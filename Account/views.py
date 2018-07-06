@@ -8,7 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt 
 from django.forms import widgets
 from django.http import HttpResponse
-import datetime
+from datetime import datetime
+from MachLab.models import Userinfo
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=16, widget=widgets.Input(attrs={'type':"username",'class':"form-control",'id':"exampleInputUsername"}))
@@ -79,6 +80,8 @@ def register(request):
                 else:
                     user = User.objects.create_user(username=username, email=email, password=password)
                     user.save()
+                    userinfo = Userinfo.objects.create(user=user, bio='', url='', location='', avatar=None)
+                    userinfo.save()
                     auth.login(request, user)
                     return HttpResponseRedirect(redirect_to)
     else:
