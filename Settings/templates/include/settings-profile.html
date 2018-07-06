@@ -1,0 +1,61 @@
+﻿<div class="profile-main main">
+    <div class="profile-container">
+        <div class="profile">
+            <div class="profile-form-header-wrapper">
+                <div class="profile-form-header">个人信息概览</div>
+                {% if updateInvalid %}
+                    <div class="profile-form-error">更改用户信息失败！</div>
+                {% endif %}
+            </div>
+
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="card profile-form">
+                    <div class="field profile-form-username">
+                        <label for="id_username">用户名</label>
+                        {{ form.username }}
+                        {{ form.username.errors }}
+                    </div>
+
+                    <div class="field profile-form-email">
+                        <label for="id_email">电子邮件地址</label>
+                        {{ form.email }}
+                        {{ form.email.errors }}
+                    </div>
+
+                    <div class="field profile-form-bio">
+                        <label for="id_bio">个人简介</label>
+                        {{ form.bio }}
+                        {{ form.bio.errors }}
+                    </div>
+
+                    <div class="field profile-form-url">
+                        <label for="id_url">URL</label>
+                        {{ form.url }}
+                        {{ form.url.errors }}
+                    </div>
+
+                    <div class="field profile-form-location">
+                        <label for="id_location">位置</label>
+                        {{ form.location }}
+                        {{ form.location.errors }}
+                    </div>
+                    
+                    <div class="field profile-form-avatar">
+                        <img class="avatar rounded-2" src="/static/media/avatar/{{request.session.username}}" alt="avatar" />
+                        {{ form.avatar }}
+                        {{ form.avatar.errors }}
+                    </div>
+
+                    <div class="profile-form-action">
+                        <button type="submit" class="button form-button is-primary">提交更改</button>
+                    </div>
+
+                    <div class="profile-form-next">
+                        <input type="hidden" name="next" value="" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

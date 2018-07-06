@@ -1,21 +1,21 @@
 from django.shortcuts import render
 
-def docs(request, tag=''):
+def docs(request):
     context = {}
     context['title'] = '文档 | MachLab'
     return render(request, 'docs.html', context)
 
-def overview(request, tag=''):
+def overview(request):
     context = {}
     context['title'] = '文档概览 | MachLab'
     return render(request, 'overview.html', context)
 
-def setup(request, tag=''):
+def setup(request):
     context = {}
     context['title'] = '安装手册 | MachLab'
-    return render(request, 'setup.html' + tag, context)
+    return render(request, 'setup.html', context)
 
-def userguide(request, tag=''):
+def userguide(request):
     context = {}
     context['title'] = '用户指南 | MachLab'
     return render(request, 'userguide.html', context)

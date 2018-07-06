@@ -9,9 +9,9 @@
           	    </div>
           	    <div class="navbar-collapse collapse">
           	        <ul class="nav navbar-nav navbar-left">
-          	            <li><a id="nav-docs" href="/docs">Docs</a></li>
-          	            <li><a id="nav-updates" href="/models">Models</a></li>
-          	            <li><a id="nav-faqs" href="/docs/supporting/faq">FAQ</a></li>
+          	            <li><a id="nav-docs" href="{% url 'docs' %}">Docs</a></li>
+          	            <li><a id="nav-updates" href="{% url 'models' %}">Models</a></li>
+          	            <li><a id="nav-faqs" href="{% url 'faq' %}">FAQ</a></li>
           	            <!--<li class="search visible-xs"><a href="/search">Search</a></li>-->
           	        </ul>
           	
@@ -36,11 +36,11 @@
                             </a>
                         </li>
                         {% if request.user.is_authenticated %}
-                            <li><a id="nav-username" href="/account/profile/">{{ request.user.username }}，您好！</a></li>
-          	                <li><a id="nav-logout" href="/account/logout/">Logout</a></li>
+                            <li><a id="nav-username" href="{% url 'profile' %}">{{ request.user.username }}，您好！</a></li>
+          	                <li><a id="nav-logout" href="{% url 'logout' %}">Logout</a></li>
                         {% else %}
-          	                <li><a id="nav-login" href="/account/login/">Signin</a></li>
-          	                <li><a id="nav-register" href="/account/register/">Signup</a></li>
+          	                <li><a id="nav-login" href="{% url 'login' %}">Signin</a></li>
+          	                <li><a id="nav-register" href="{% url 'register' %}">Signup</a></li>
                         {% endif %}
           	        </ul>
           	    </div>

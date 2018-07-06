@@ -10,7 +10,6 @@ urlpatterns = [
     url('login/', account_view.login, name='login'),
     url('register/', account_view.register, name='register'),
     url('lost-password/', account_view.lost_password, name='lost-password'),
-    url('logout/', account_view.logout, name='logout'),
-    url('profile/', account_view.profile, name='profile'),
+    url('logout/', account_view.logout, name='logout'),\
 ]
 

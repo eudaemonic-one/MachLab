@@ -2,7 +2,8 @@
 from django import forms
 from django.shortcuts import render, reverse, redirect, HttpResponseRedirect
 from django.contrib import auth
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from MachLab.models import MyUser, MyUserManager
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt 
@@ -10,8 +11,8 @@ from django.http import HttpResponse
 import datetime
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=32)
-    password = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput())#,error_messages={'required':u'密码位数错误'})
+    username = forms.CharField(max_length=16)
+    password = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput())
     
     def clean_password(self):
         password = self.cleaned_data['password']
@@ -63,7 +64,7 @@ def register(request):
             email = cd['email']
             username = cd['username']
             password = cd['password']
-            user = auth.authenticate(email=email, password=password)
+            user = auth.authenticate(username=username, password=password)
 
             if user is not None:
                 context['form'] = RegisterForm()
@@ -76,7 +77,7 @@ def register(request):
                     context['alreadyRegistered'] = True
                     return render(context, 'register.html', context)
                 else:
-                    user = User.objects.create_user(username=username, email=email, password=password)
+                    user = MyUser.objects.create_user(username=username, email=email, password=password)
                     user.save()
                     auth.login(request, user)
                     return HttpResponseRedirect(redirect_to)
@@ -103,7 +104,4 @@ def lost_password(request):
     
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/')
-
-def profile(request):
     return HttpResponseRedirect('/')

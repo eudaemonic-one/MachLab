@@ -22,19 +22,24 @@
                         {{ form.username }}
                         {{ form.username.errors }}
                     </div>
+
                     <div class="field login-form-password">
                         <label for="id_password">密码</label>
                         {{ form.password }}
                         {{ form.password.errors }}
                     </div>
+
                     <p class="login-form-terms">如尚未注册，请尝试<a href="{% url 'register'%}">MachLab</a>！</p>
+
                     <div class="login-form-action">
                         <button type="submit" class="button form-button is-primary">登录</button>
                     </div>
+
                     <div class="login-form-next">
                         <input type="hidden" name="next" value="/" />
                     </div>
                 </div>
+
                 <div class="login-links">
                     <a href="{% url 'lost-password'%}" rel="external">忘记密码？</a>
                     <a href="{% url 'index'%}" rel="external" class="logged-out-form-back-link">←返回 MachLab 首页</a>

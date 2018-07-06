@@ -1,0 +1,47 @@
+﻿<div class="account-main main">
+    <div class="account-container">
+        <div class="account">
+            <div class="account-form-header-wrapper">
+                <div class="account-form-header">账户信息概览</div>
+                {% if oldPasswordWrong %}
+                    <div class="account-form-error">旧密码输入无效！</div> 
+                {% elif confirmPasswordWrong %}
+                    <div class="account-form-error">新密码输入不一致！</div> 
+                {% elif updateInvalid %}
+                    <div class="account-form-error">更改用户密码失败！</div>
+                {% endif %}
+            </div>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="card account-form">
+                    <div class="field account-form-oldpassword">
+                        <label for="id_oldpassword">旧密码</label>
+                        {{ form.oldpassword }}
+                        {{ form.oldpassword.errors }}
+                    </div>
+
+                    <div class="field account-form-newpassword">
+                        <label for="id_newpassword">新密码</label>
+                        {{ form.newpassword }}
+                        {{ form.newpassword.errors }}
+                    </div>
+
+                    <div class="field account-form-confirmpassword">
+                        <label for="id_confirmpassword">确认新密码</label>
+                        {{ form.confirmpassword }}
+                        {{ form.confirmpassword.errors }}
+                    </div>
+
+                    <div class="account-form-action">
+                        <button type="submit" class="button form-button is-primary">提交更改</button>
+                    </div>
+
+                    <div class="account-form-next">
+                        <input type="hidden" name="next" value="" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

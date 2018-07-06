@@ -61,9 +61,34 @@
     <Compile Include="MachLab\settings.py" />
     <Compile Include="MachLab\urls.py" />
     <Compile Include="MachLab\wsgi.py" />
+    <Compile Include="Models\admin.py" />
+    <Compile Include="Models\apps.py" />
+    <Compile Include="Models\migrations\__init__.py" />
+    <Compile Include="Models\models.py" />
+    <Compile Include="Models\tests.py" />
+    <Compile Include="Models\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\views.py" />
+    <Compile Include="Models\__init__.py" />
+    <Compile Include="Profile\admin.py" />
+    <Compile Include="Profile\apps.py" />
+    <Compile Include="Profile\migrations\__init__.py" />
+    <Compile Include="Profile\models.py" />
+    <Compile Include="Profile\tests.py" />
+    <Compile Include="Profile\urls.py" />
+    <Compile Include="Profile\views.py" />
+    <Compile Include="Profile\__init__.py" />
+    <Compile Include="Settings\admin.py" />
+    <Compile Include="Settings\apps.py" />
+    <Compile Include="Settings\migrations\__init__.py" />
+    <Compile Include="Settings\models.py" />
+    <Compile Include="Settings\tests.py" />
+    <Compile Include="Settings\urls.py" />
+    <Compile Include="Settings\views.py" />
+    <Compile Include="Settings\__init__.py" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Account\templates\profile.html" />
     <Content Include="Docs\templates\docs.html" />
     <Content Include="Docs\templates\include\docs-overview.html" />
     <Content Include="Docs\templates\faq.html" />
@@ -71,10 +96,23 @@
     <Content Include="Docs\templates\overview.html" />
     <Content Include="Docs\templates\setup.html" />
     <Content Include="Docs\templates\userguide.html" />
+    <Content Include="Models\templates\models.html" />
+    <Content Include="Profile\templates\include\profile-body.html" />
+    <Content Include="Profile\templates\include\profile-navbar.html" />
+    <Content Include="Profile\templates\profile.html" />
     <Content Include="requirements.txt" />
     <Content Include="requirements\common.txt" />
     <Content Include="requirements\dev.txt" />
     <Content Include="requirements\test.txt" />
+    <Content Include="Settings\templates\account.html" />
+    <Content Include="Settings\templates\applications.html" />
+    <Content Include="Settings\templates\include\settings-account.html" />
+    <Content Include="Settings\templates\include\settings-applications.html" />
+    <Content Include="Settings\templates\include\settings-navbar.html" />
+    <Content Include="Settings\templates\include\settings-profile.html" />
+    <Content Include="Settings\templates\include\settings-repositories.html" />
+    <Content Include="Settings\templates\repositories.html" />
+    <Content Include="Settings\templates\settings.html" />
     <Content Include="static\css\bootstrap-theme.css" />
     <Content Include="static\css\bootstrap-theme.css.map" />
     <Content Include="static\css\bootstrap-theme.min.css" />
@@ -125,7 +163,18 @@
     <Folder Include="Docs\templates\" />
     <Folder Include="Docs\templates\include\" />
     <Folder Include="MachLab\" />
+    <Folder Include="Models\" />
+    <Folder Include="Models\migrations\" />
+    <Folder Include="Models\templates\" />
+    <Folder Include="Profile\" />
+    <Folder Include="Profile\migrations\" />
+    <Folder Include="Profile\templates\" />
+    <Folder Include="Profile\templates\include\" />
     <Folder Include="requirements\" />
+    <Folder Include="Settings\" />
+    <Folder Include="Settings\migrations\" />
+    <Folder Include="Settings\templates\" />
+    <Folder Include="Settings\templates\include\" />
     <Folder Include="static\" />
     <Folder Include="static\css\" />
     <Folder Include="static\fonts\" />
@@ -133,6 +182,7 @@
     <Folder Include="static\js\" />
     <Folder Include="static\media\" />
     <Folder Include="static\icons\" />
+    <Folder Include="static\media\avatar\" />
     <Folder Include="templates\" />
     <Folder Include="templates\admin\" />
     <Folder Include="templates\include\" />

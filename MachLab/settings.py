@@ -41,8 +41,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'MachLab',
+    'Docs',
     'Account',
-    'Docs'
+    'Settings',
+    'Profile',
+    'Models'
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -138,3 +142,8 @@ STATICFILES_DIRS = (
     ('icons',os.path.join(STATIC_ROOT,'icons').replace('\\','/') ),
     ('media',os.path.join(STATIC_ROOT,'media').replace('\\','/') )
 )
+
+MEDIA_ROOT = (BASE_DIR , 'media' )
+MEDIA_URL = '/media/'
+
+AUTH_USER_MODEL = 'MachLab.MyUser'
