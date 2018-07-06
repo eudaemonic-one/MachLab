@@ -1,5 +1,29 @@
 from django.db import models
-from django.contrib.auth.models import (BaseUserManager, AbstractBaseUser)
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import User
+
+class Userinfo(models.Model):
+    user = models.OneToOneField(User)
+    bio = models.CharField(max_length=256)
+    url = models.URLField(max_length=256)
+    location = models.CharField(max_length=32)
+    avatar = models.FileField(upload_to='avatar/')
+    register_datetime = models.DateField(auto_now_add=True)
+
+    def get_bio(self):
+        return self.bio
+
+    def get_url(self):
+        return self.url
+
+    def get_location(self):
+        return self.location
+    
+    def get_avatar(self):
+        return self.avatar
+      
+    def get_registered_date(self):
+        return self.registered_date
     
 class MyUserManager(BaseUserManager):
     def create_user(self, username, email, password):
@@ -87,3 +111,4 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
+  

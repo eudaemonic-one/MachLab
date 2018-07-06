@@ -2,8 +2,8 @@
 from django import forms
 from django.shortcuts import render, reverse, redirect, HttpResponseRedirect
 from django.contrib import auth
-#from django.contrib.auth.models import User
-from MachLab.models import MyUser, MyUserManager
+from django.contrib.auth.models import User
+#from MachLab.models import MyUser, MyUserManager
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt 
@@ -14,23 +14,31 @@ class ProfileForm(forms.Form):
     username = forms.CharField(max_length=16)
     email = forms.EmailField(max_length=32)
     bio = forms.CharField(max_length=256)
-    url = forms.CharField(max_length=128)
+    url = forms.URLField(max_length=256)
     location = forms.CharField(max_length=32)
     avatar = forms.ImageField()
 
-    def set_default_values(self,p_username='', p_email='', p_bio='', p_url='', p_location='', p_avatar=''):
-        username = forms.CharField(max_length=16, empty_value=p_username)
-        email = forms.EmailField(max_length=32, empty_value=p_email)
-        bio = forms.CharField(max_length=256, empty_value=p_bio)
-        url = forms.CharField(max_length=128, empty_value=p_url)
-        location = forms.CharField(max_length=32, empty_value=p_location)
-        avatar = forms.ImageField()
+    def set_initial_fields(self, user=None):
+        if user:
+            if user.username:
+                self.fields['username'].initial = user.username
+            if user.email:
+                self.fields['email'].initial = user.email
+            if user.userinfo:
+                if user.userinfo.bio:
+                    self.fields['bio'].initial = user.userinfo.bio
+                if user.userinfo.url:
+                    self.fields['url'].initial = user.userinfo.url
+                if user.userinfo.location:
+                    self.fields['location'].initial = user.userinfo.location
+                if user.userinfo.avatar:
+                    self.fields['avatar'].initial = user.userinfo.avatar
 
 @login_required
 def profile(request):
     context = {}
     context['title'] = '个人信息概览 | MachLab'
-    redirect_to = request.POST.get('next', request.GET.get('next',''))
+    redirect_to = request.POST.get('next')
     if request.method == 'POST':
         form = ProfileForm(request.POST)
         context['form'] = form
@@ -43,22 +51,29 @@ def profile(request):
             location = cd['location']
             avatar = cd['avatar']
             try:
-                user = MyUser.objects.get_by_natural_key(request.user.username)
-                user.update(username=username, email=email, bio=bio, url=url, location=location, avatar=avatar)
+                user = User.objects.get(username=request.user.username)
+                if username:
+                    user.username = username
+                if email:
+                    user.email = email
+                if user.userinfo:
+                    if bio:
+                        user.userinfo.bio = bio
+                    if url:
+                        user.userinfo.url = url
+                    if location:
+                        user.userinfo.location = location
+                    if avatar:
+                        user.userinfo.avatar = avatar
+                user.save()
             except Exception as e:
                 context['updateInvalid'] = True
             finally:
                 return render(request, 'settings.html', context)
     else:
-        user = MyUser.objects.get_by_natural_key(request.user.username)
-        username = user.get_username()
-        email = user.get_email()
-        bio = user.get_bio()
-        url = user.get_url()
-        location = user.get_location()
-        avatar = user.get_avatar()
+        user = User.objects.get(username=request.user.username)
         form = ProfileForm()
-        form.set_default_values(username, email, bio, url, location, avatar)
+        form.set_initial_fields(user)
         context['form'] = form
         return render(request, 'settings.html', context)
     

@@ -2,17 +2,17 @@
 from django import forms
 from django.shortcuts import render, reverse, redirect, HttpResponseRedirect
 from django.contrib import auth
-#from django.contrib.auth.models import User
-from MachLab.models import MyUser, MyUserManager
+from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt 
+from django.forms import widgets
 from django.http import HttpResponse
 import datetime
 
 class LoginForm(forms.Form):
-    username = forms.CharField(max_length=16)
-    password = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput())
+    username = forms.CharField(max_length=16, widget=widgets.Input(attrs={'type':"username",'class':"form-control",'id':"exampleInputUsername"}))
+    password = forms.CharField(max_length=16, min_length=6, widget=widgets.PasswordInput(attrs={'type':"password",'class':"form-control",'id':"exampleInputPassword"}))
     
     def clean_password(self):
         password = self.cleaned_data['password']
@@ -48,9 +48,9 @@ def login(request):
         return render(request, 'login.html', context)
 
 class RegisterForm(forms.Form):
-    email = forms.EmailField(max_length=32)
-    username = forms.CharField(max_length=16)
-    password = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput())
+    email = forms.EmailField(max_length=32, widget=widgets.EmailInput(attrs={'type':"email",'class':"form-control",'id':"exampleInputEmail"}))
+    username = forms.CharField(max_length=16,widget=widgets.Input(attrs={'type':"username",'class':"form-control",'id':"exampleInputUsername"}))
+    password = forms.CharField(max_length=16, min_length=6, widget=widgets.PasswordInput(attrs={'type':"password",'class':"form-control",'id':"exampleInputPassword"}))
     
 def register(request):
     context = {}
@@ -64,7 +64,7 @@ def register(request):
             email = cd['email']
             username = cd['username']
             password = cd['password']
-            user = auth.authenticate(username=username, password=password)
+            user = auth.authenticate(email=email, password=password)
 
             if user is not None:
                 context['form'] = RegisterForm()
@@ -77,7 +77,7 @@ def register(request):
                     context['alreadyRegistered'] = True
                     return render(context, 'register.html', context)
                 else:
-                    user = MyUser.objects.create_user(username=username, email=email, password=password)
+                    user = User.objects.create_user(username=username, email=email, password=password)
                     user.save()
                     auth.login(request, user)
                     return HttpResponseRedirect(redirect_to)
@@ -86,7 +86,7 @@ def register(request):
         return render(request, 'register.html', context)
 
 class LostPasswordForm(forms.Form):
-    email = forms.EmailField(max_length=32)
+    email = forms.EmailField(max_length=32, widget=widgets.EmailInput(attrs={'type':"email",'class':"form-control",'id':"exampleInputEmail"}))
     
 #@csrf_exempt
 def lost_password(request):

@@ -1,27 +1,5 @@
 ﻿{% extends "docs.html" %}
 
 {% block docs-body%}
-<div class="col-sm-9 col-md-8 body">
-	<h1 id="userguide-intro">Intro</h1>
-        <p>Mach Lab Introduction.</p>
-
-	<h1 id="userguide-basic-running">Basic Running</h1>
-        <p>Mach Lab is a machine learning laboratory.</p>
-        <h2 id="">Start MachLab</h2>
-            <p>Start MachLab Client or Website.</p>
-            <ul>
-                <li><a href="">MachLab Client</a> - Use client.</li>
-                <li><a href="">MachLab Website</a> - Use website.</li>
-            </ul>
-
-	<h1 id="userguide-extension">Extension</h1>
-        <p>Mach Lab Extension.</p>
-
-	<h1 id="userguide-data">Data</h1>
-        <p>Mach Lab Data.</p>
-
-	<h1 id="userguide-accessibility">Accessibility</h1>
-        <p>Mach Lab Accessibility.</p>
-
-</div>
+{% include "./include/docs-userguide.html"%}
 {% endblock%}

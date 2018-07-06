@@ -1,0 +1,62 @@
+.label-link {
+    float: right;
+}
+
+.btn-block {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #28a745;
+    background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
+}
+
+.auth-form-body {
+    padding: 20px;
+    font-size: 14px;
+    background-color: #fff;
+    border: 1px solid #d8dee2;
+}
+
+.mt-3 {
+    margin-top: 16px !important;
+}
+
+.flash-error {
+    color: #86181d;
+    background-color: #ffdce0;
+    border-color: rgba(27,31,35,0.15);
+}
+
+.flash {
+    position: relative;
+    border: 1px solid rgba(27,31,35,0.15);
+}
+
+flash-close {
+    float: right;
+    padding: 16px;
+    margin: -16px;
+    color: inherit;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    opacity: 0.6;
+}
+
+.octicon {
+    display: inline-block;
+    vertical-align: text-bottom;
+    fill: currentColor;
+}
+
+.create-account-callout {
+    padding: 15px 20px;
+    text-align: center;
+    border: 1px solid #d8dee2;
+    border-radius: 5px;
+}

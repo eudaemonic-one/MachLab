@@ -4,48 +4,51 @@
 {% endblock %}
 
 {% block main %}
-<div class="login-main main">
-    <div class="login-container">
-        <div class="login">
-            <div class="login-form-header-wrapper">
-                <div class="login-form-header">登录到您的账户</div>
-                {% if loginInvalid %}
-                    <div class="login-form-error">登录失败！</div>
-                {% endif %}
+    <link rel="stylesheet" type="text/css" href="/static/css/account-style.css">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-4 column">
             </div>
-
-            <form action="" method="post">
-                {% csrf_token %}
-                <div class="card login-form">
-                    <div class="field login-form-userdata">
-                        <label for="id_username">用户名</label>
-                        {{ form.username }}
-                        {{ form.username.errors }}
-                    </div>
-
-                    <div class="field login-form-password">
-                        <label for="id_password">密码</label>
-                        {{ form.password }}
-                        {{ form.password.errors }}
-                    </div>
-
-                    <p class="login-form-terms">如尚未注册，请尝试<a href="{% url 'register'%}">MachLab</a>！</p>
-
-                    <div class="login-form-action">
-                        <button type="submit" class="button form-button is-primary">登录</button>
-                    </div>
-
-                    <div class="login-form-next">
-                        <input type="hidden" name="next" value="/" />
+            <div class="col-md-4 column">
+                <img height="140" width="140" src="/static/img/logo.png" class="img-responsive center-block" />
+                <h3 class="text-center">
+                    登录您的账号
+                </h3>
+                {% if loginInvalid %}
+                <div class="flash flash-error">
+                    <div class="text-center">
+                        登录失败！
                     </div>
                 </div>
-
-                <div class="login-links">
-                    <a href="{% url 'lost-password'%}" rel="external">忘记密码？</a>
-                    <a href="{% url 'index'%}" rel="external" class="logged-out-form-back-link">←返回 MachLab 首页</a>
+                {% endif %}
+                <div class="row clearfix">
+                    <form role="form" action="" method="post" class="auth-form-body mt-3">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Username</label>
+                            {{ form.username }}
+                            {{ form.username.errors }}
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label><a class="label-link" href="{% url 'lost-password'%}" rel="external">忘记密码？</a>
+                            {{ form.password }}
+                            {{ form.password.errors }}
+                        </div>
+                        <div class="login-form-action">
+                            <button type="submit" class="btn btn-primary btn-block">登录</button>
+                        </div>
+                        <div class="login-links mt-3">
+                            <a href="{% url 'index'%}" rel="external" class="logged-out-form-back-link">←返回 MachLab 首页</a>
+                        </div>
+                        <div class="login-form-next">
+                            <input type="hidden" name="next" value="/" />
+                        </div>
+                    </form>
                 </div>
-            </form>
+                <p class="create-account-callout mt-3">如尚未注册，请尝试<a href="{% url 'register'%}">MachLab</a>！</p>
+            </div>
+            <div class="col-md-4 column">
+            </div>
         </div>
-    </div>
-</div>
+    </div>  
 {% endblock %}

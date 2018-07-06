@@ -143,7 +143,7 @@ STATICFILES_DIRS = (
     ('media',os.path.join(STATIC_ROOT,'media').replace('\\','/') )
 )
 
-MEDIA_ROOT = (BASE_DIR , 'media' )
-MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/media/')
+MEDIA_URL = '/upload/'
 
-AUTH_USER_MODEL = 'MachLab.MyUser'
+#AUTH_USER_MODEL = 'MachLab.MyUser'

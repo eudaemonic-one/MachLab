@@ -90,9 +90,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Docs\templates\docs.html" />
+    <Content Include="Docs\templates\include\docs-faq.html" />
     <Content Include="Docs\templates\include\docs-overview.html" />
     <Content Include="Docs\templates\faq.html" />
     <Content Include="Docs\templates\include\docs-navbar.html" />
+    <Content Include="Docs\templates\include\docs-setup.html" />
+    <Content Include="Docs\templates\include\docs-userguide.html" />
     <Content Include="Docs\templates\overview.html" />
     <Content Include="Docs\templates\setup.html" />
     <Content Include="Docs\templates\userguide.html" />
@@ -113,6 +116,7 @@
     <Content Include="Settings\templates\include\settings-repositories.html" />
     <Content Include="Settings\templates\repositories.html" />
     <Content Include="Settings\templates\settings.html" />
+    <Content Include="static\css\account-style.css" />
     <Content Include="static\css\bootstrap-theme.css" />
     <Content Include="static\css\bootstrap-theme.css.map" />
     <Content Include="static\css\bootstrap-theme.min.css" />

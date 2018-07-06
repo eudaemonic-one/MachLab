@@ -1,34 +1,5 @@
 ﻿{% extends "docs.html" %}
 
 {% block docs-body%}
-<div class="col-sm-9 col-md-8 body">
-	<h1 id="setup-windows">Running Mach Lab on Windows</h1>
-        <h2>Installation</h2>
-            <ol>
-                <li>Download the <a href="{% url 'download'%}" class="external-link" target="_blank">Mach Lab Installer</a> for Windows.</li>
-                <li>Once it is downloaded, run the installer (MachLab-version.exe). This will only take a minute.</li>
-                <li>By default, Mach Lab is installed under <code>C:\Program Files\Mach Lab</code> for a 64-bit machine.</li>
-            </ol>
-
-        <h2>Next Steps</h2>
-            <p>Once you have installed Mach Lab, these topics will help you learn more about Mach Lab:</p>
-            <ul>
-                <li><a href="{% url 'userguide'%}/#">User Interface</a> - A quick orientation to Mach Lab.</li>
-                <li><a href="{% url 'userguide'%}/#">User/Workspace Settings</a> - Learn how to configure Mach Lab to your preferences through settings.</li>
-            </ul>
-    
-	<h1 id="setup-linux">Running Mach Lab on Linux</h1>
-        <h2>Installation</h2>
-            <h3>Debian and Ubuntu based distributions</h3>
-            <p>The easiest way to install for Debian/Ubuntu based distributions is to download and install the 
-                <a href="{% url 'index'%}" class="external-link" target="_blank">.deb package (64-bit)</a> 
-                either through the graphical software center if it's available.
-            </p>
-        <h2>Next Steps</h2>
-            <p>Once you have installed Mach Lab, these topics will help you learn more about Mach Lab:</p>
-            <ul>
-                <li><a href="{% url 'userguide'%}/#">User Interface</a> - A quick orientation to Mach Lab.</li>
-                <li><a href="{% url 'userguide'%}/#">User/Workspace Settings</a> - Learn how to configure Mach Lab to your preferences through settings.</li>
-            </ul>
-</div>
+{% include "./include/docs-setup.html"%}
 {% endblock%}
