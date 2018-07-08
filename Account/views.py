@@ -5,11 +5,11 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt 
 from django.forms import widgets
 from django.http import HttpResponse
 from datetime import datetime
 from MachLab.models import Userinfo
+from MachLab.settings import BASE_DIR
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=16, widget=widgets.Input(attrs={'type':"username",'class':"form-control",'id':"exampleInputUsername"}))

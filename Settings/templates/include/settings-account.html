@@ -2,15 +2,19 @@
     <div class="account-container">
         <div class="account">
             <div class="account-form-header-wrapper">
-                <div class="account-form-header">账户信息概览</div>
+                <div class="Subhead mt-0 mb-0">
+                    <h2 class="Subhead-heading">账户信息概览</h2>
+                </div>
                 {% if oldPasswordWrong %}
-                    <div class="account-form-error">旧密码输入无效！</div> 
+                    <div class="flash flash-full flash-error">旧密码输入无效！</div> 
                 {% elif confirmPasswordWrong %}
-                    <div class="account-form-error">新密码输入不一致！</div> 
+                    <div class="flash flash-full flash-error">新密码输入不一致！</div> 
                 {% elif updateInvalid %}
-                    <div class="account-form-error">更改用户密码失败！</div>
+                    <div class="flash flash-full flash-error">更改用户密码失败！</div>
                 {% endif %}
             </div>
+            
+            <hr />
 
             <form action="" method="post">
                 {% csrf_token %}
@@ -27,14 +31,14 @@
                         {{ form.newpassword.errors }}
                     </div>
 
-                    <div class="field account-form-confirmpassword">
+                    <div class="field account-form-confirmpassword mb-2">
                         <label for="id_confirmpassword">确认新密码</label>
                         {{ form.confirmpassword }}
                         {{ form.confirmpassword.errors }}
                     </div>
 
-                    <div class="account-form-action">
-                        <button type="submit" class="button form-button is-primary">提交更改</button>
+                    <div class="account-form-action"><br />
+                        <button type="submit" class="btn btn-primary">提交更改</button>
                     </div>
 
                     <div class="account-form-next">

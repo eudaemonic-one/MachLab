@@ -3,19 +3,20 @@ from django import forms
 from django.shortcuts import render, reverse, redirect, HttpResponseRedirect
 from django.contrib import auth
 from django.contrib.auth.models import User
-#from MachLab.models import MyUser, MyUserManager
 from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt 
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.forms import widgets
+from MachLab.models import Userinfo, Model, Modelfile
 
 class ProfileForm(forms.Form):
-    username = forms.CharField(max_length=16)
-    email = forms.EmailField(max_length=32)
-    bio = forms.CharField(max_length=256)
-    url = forms.URLField(max_length=256)
-    location = forms.CharField(max_length=32)
+    username = forms.CharField(max_length=16, widget=widgets.Input(attrs={'type':"username",'class':"form-control",'id':"exampleInputUsername"}))
+    email = forms.EmailField(max_length=32, widget=widgets.EmailInput(attrs={'type':"email",'class':"form-control",'id':"exampleInputEmail"}))
+    bio = forms.CharField(max_length=256, widget=widgets.Textarea(attrs={'class':"form-control"}))
+    url = forms.URLField(max_length=256, widget=widgets.URLInput(attrs={'class':"form-control"}))
+    location = forms.CharField(max_length=32, widget=widgets.Input(attrs={'class':"form-control"}))
     avatar = forms.ImageField(allow_empty_file=True)
 
     def set_initial_fields(self, user=None):
@@ -78,9 +79,9 @@ def profile(request):
         return render(request, 'settings.html', context)
     
 class AccountForm(forms.Form):
-    oldpassword = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput())
-    newpassword = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput())
-    confirmpassword = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput())
+    oldpassword = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput(attrs={'type':"password",'class':"form-control",'id':"exampleInputPassword"}))
+    newpassword = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput(attrs={'type':"password",'class':"form-control",'id':"exampleInputPassword"}))
+    confirmpassword = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput(attrs={'type':"password",'class':"form-control",'id':"exampleInputPassword"}))
  
 @login_required
 def account(request):
@@ -115,8 +116,14 @@ def account(request):
 def repositories(request):
     context = {}
     context['title'] = '个人模型概览 | MachLab'
-    repos = [{'name':'machlab','size':22},]
-    context['repos'] = repos
+    # User informtion #
+    user = User.objects.get(username=request.user.username)
+
+    # Models information #
+    models = Model.objects.filter(user=user)
+    for model in models:
+        model.file_count = len(Modelfile.objects.filter(model=model))
+    context['models'] = models
     return render(request, 'repositories.html', context)
 
 def applications(request):

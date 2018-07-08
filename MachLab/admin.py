@@ -4,11 +4,17 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import User
-from MachLab.models import Userinfo
+from MachLab.models import Userinfo, Model, Modelfile, ModelResult, ModelCommit, ModelPush, ModelPull, ModelDrop, Comment
+
 class UserinfoInline(admin.StackedInline):
     model = Userinfo
-    can_delete = False
+    can_delete = True
     verbose_name_plural = 'Userinfos'
+
+class ModelInline(admin.StackedInline):
+    model = Model
+    can_delete = True
+    verbose_name_plural = 'Models'
 
 class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
@@ -32,17 +38,19 @@ class UserAdmin(BaseUserAdmin):
     #        'fields': ('email', 'username', 'password', 'location')}
     #    ),
     #)
-    inlines = (UserinfoInline,)
+    inlines = (UserinfoInline, ModelInline, )
     search_fields = ('email','username')
     ordering = ('email','username')
     filter_horizontal = ()
-
-# Now register the new UserAdmin...
-#admin.site.register(MyUser, UserAdmin)
-# ... and, since we're not using Django's built-in permissions,
-# unregister the Group model from admin.
-#admin.site.unregister(Group)
-
+    
 admin.site.unregister(User)
-admin.site.register(User, UserAdmin)
 admin.site.unregister(Group)
+admin.site.register(User, UserAdmin)
+admin.site.register(Model)
+admin.site.register(Modelfile)
+admin.site.register(ModelResult)
+admin.site.register(ModelCommit)
+admin.site.register(ModelPush)
+admin.site.register(ModelPull)
+admin.site.register(ModelDrop)
+admin.site.register(Comment)
