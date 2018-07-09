@@ -24,22 +24,27 @@
                 <div class="row clearfix">
                     <form role="form" action="" method="post" class="auth-form-body mt-3">
                         {% csrf_token %}
+
                         <div class="form-group">
                             <label for="exampleInputEmail1">Username</label>
                             {{ form.username }}
                             {{ form.username.errors }}
                         </div>
+
                         <div class="form-group">
                             <label for="exampleInputPassword1">Password</label><a class="label-link" href="{% url 'lost-password'%}" rel="external">忘记密码？</a>
                             {{ form.password }}
                             {{ form.password.errors }}
                         </div>
+
                         <div class="login-form-action">
                             <button type="submit" class="btn btn-primary btn-block">登录</button>
                         </div>
+
                         <div class="login-links mt-3">
                             <a href="{% url 'index'%}" rel="external" class="logged-out-form-back-link">←返回 MachLab 首页</a>
                         </div>
+
                         <div class="login-form-next">
                             <input type="hidden" name="next" value="/" />
                         </div>

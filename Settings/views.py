@@ -70,13 +70,13 @@ def profile(request):
             except Exception as e:
                 context['updateInvalid'] = True
             finally:
-                return render(request, 'settings.html', context)
+                return render(request, 'account-settings.html', context)
     else:
         user = User.objects.get(username=request.user.username)
         form = ProfileForm()
         form.set_initial_fields(user)
         context['form'] = form
-        return render(request, 'settings.html', context)
+        return render(request, 'account-settings.html', context)
     
 class AccountForm(forms.Form):
     oldpassword = forms.CharField(max_length=16, min_length=6, widget=forms.PasswordInput(attrs={'type':"password",'class':"form-control",'id':"exampleInputPassword"}))

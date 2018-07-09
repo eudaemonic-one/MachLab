@@ -1,0 +1,174 @@
+﻿element.style {
+    background-color: #563d7c;
+}
+
+.repo-language-color {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.mb-3 {
+    margin-right: 16px !important;
+}
+
+.mr-3 {
+    margin-right: 16px !important;
+}
+
+.avatar {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 1;
+    vertical-align: middle;
+    border-radius: 3px;
+}
+
+.ul, ol {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
+
+.width-full {
+    width: 100% !important;
+}
+
+.rounded-2 {
+    border-radius: 6px !important;
+}
+
+.vcard-fullname {
+    font-size: 26px;
+    line-height: 30px;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.vcard-username {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 24px;
+    color: #666;
+}
+
+.vcard-details {
+    list-style: none;
+}
+
+.py-3 {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+}
+
+.border-gray-light {
+    border-color: #eaecef !important;
+}
+
+.border-top {
+    border-top: 1px #e1e4e8 solid !important;
+}
+
+.pr-3 {
+    padding-right: 16px !important;
+}
+
+.float-left {
+    float: left !important;
+}
+
+.col-3 {
+    width: 25%;
+}
+
+user agent stylesheet
+div {
+    display: block;
+}
+
+
+.px-3 {
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+}
+
+.mt-4 {
+    margin-top: 24px !important;
+}
+
+.container-lg {
+    max-width: 1012px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.user-profile-nav {
+    background-color: #fff;
+    border-bottom: solid 1px #d1d5da;
+}
+
+.top-0 {
+    top: 0 !important;
+}
+
+.UnderlineNav {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+.UnderlineNav-item {
+    padding: 16px 8px;
+    margin-right: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #586069;
+    text-align: center;
+    border-bottom: 2px solid transparent;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.py-4 {
+    padding-bottom: 24px !important;
+}
+
+.width-full {
+    width: 100% !important;
+}
+
+.border-bottom {
+    border-bottom: 1px #e1e4e8 solid !important;
+}
+
+.pl-2 {
+    padding-left: 8px !important;
+}
+
+.float-left {
+    float: left !important;
+}
+
+.col-9 {
+    width: 75%;
+}

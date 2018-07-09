@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from MachLab.models import Userinfo, Model
+from MachLab.public import model_type_choices, icon_colors
 
 def user_profile(request, username=None):
     context = {}
@@ -21,6 +22,7 @@ def user_profile(request, username=None):
     # Models information #
     models = Model.objects.filter(user=user)
     for model in models:
-        model.model_type = model.choices[model.model_type][1]
+        model.icon_color = icon_colors[model.model_type]
+        model.model_type = model_type_choices[model.model_type][1]
     context['models'] = models
     return render(request, 'user-profile.html', context)

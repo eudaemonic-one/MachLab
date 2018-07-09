@@ -1,30 +1,40 @@
 ﻿<div class="position-relative">
+    <div class="border-bottom border-gray-dark py-3">
+        {% if request.user.username == username %}
+        <a href="/models/{{request.user.username}}/new" class="btn btn-primary ml-3">
+            <svg class="octicon octicon-repo" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path></svg>
+            New Model
+        </a>
+        {% endif %}
+    </div>
+
     <div class="mt-4">
         <div class="js-pinned-repos-reorder-container">
+            <!--
             <h2 class="f4 mb-2 text-normal">
                 Popular models
                 <span class="ml-2 text-gray f6 js-pinned-repos-reorder-message" role="status" aria-live="polite" data-error-text="Something went wrong." data-success-text="Order updated."></span>
             </h2>
-
+            -->
             <ol class="pinned-repos-list mb-4">
                 {% for model in models %}
-                <li class="pinned-repo-item p-3 mb-3 border border-gray-dark rounded-1 public fork">
+                <li class="pinned-repo-item p-3 mb-3 border border-gray-dark rounded-1 public fork border-bottom py-4">
                     <span class="pinned-repo-item-content">
                         <span class="d-block">
-                            <a href="/models/{{username}}/{{model.model_name}}" class="text-bold">
-                                <span class="repo js-repo" title="{{model.model_name}}">{{model.model_name}}</span>
-                            </a>
+                            <h3>
+                                <a href="/models/{{username}}/{{model.model_name}}" class="text-bold">
+                                    <span class="repo js-repo" title="{{model.model_name}}">{{model.model_name}}</span>
+                                </a>
+                            </h3>
                         </span>
-
-                        <p class="text-gray text-small mb-2">Recently modified at {{model.modified_datetime}}</p>
 
                         <p class="pinned-repo-desc text-gray text-small d-block mt-2 mb-3">{{model.description}}</p>
 
-                        <p class="mb-0 f6 text-gray">
-                            <span class="repo-language-color pinned-repo-meta" style="background-color:#f34b7d;"></span>
+                        <span class="repo-language-color pinned-repo-meta" style="background-color:{{model.icon_color}};"></span>
                             {{model.model_type}}
-                        </p>
-                    </span>
+                            <span class="mr-3"></span>
+                            <relative-time class="text-gray text-small ">Recently modified at {{model.modified_datetime}}</relative-time>
+                        </span>
                 </li>
                 {% empty %}
                 <div class="blankslate mt-5">

@@ -4,8 +4,6 @@
 {% endblock %}
 
 {% block main %}
-<link rel="stylesheet" type="text/css" href="/static/css/models.css">
-
 <div role="main" class="application-main ">
     <div itemscope="" itemtype="http://schema.org/SoftwareSourceCode" class="">
         <div id="js-repo-pjax-container" data-pjax-container="">
@@ -14,7 +12,7 @@
             {% endblock%}
 
             {% block models-pagebody%}
-            {% include "./include/models-pagebody-files.html"%}
+            {% include "./include/models-pagebody-settings.html"%}
             {% endblock%}
         </div>
     </div>

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 from django.contrib.auth.models import User
+from MachLab.public import model_type_choices, model_file_choices
 
 class Userinfo(models.Model):
     user = models.OneToOneField(User)
@@ -14,15 +15,9 @@ class Userinfo(models.Model):
     #    return
     
 class Model(models.Model):
-    choices = (
-        (0, 'default'),
-        (1, 'tensorflow'),
-        (2, 'keras'),
-        (3, 'pytorch'),
-    )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     model_name = models.CharField(max_length=32)
-    model_type = models.IntegerField(choices=choices, default=(0, 'default'), blank=True)
+    model_type = models.IntegerField(choices=model_type_choices, default=(0, 'default'), blank=True)
     description = models.TextField(max_length=256, blank=True, null=True)
     modified_datetime = models.DateTimeField(auto_now=True)
  
@@ -46,13 +41,7 @@ class Modelfile(models.Model):
         ordering = ['-modified_datetime']
 
 class ModelResult(Modelfile):
-    choices = (
-        (0, 'default'),
-        (1, '.txt'),
-        (2, '.py'),
-        (3, '.r'),
-    )
-    result_type = models.IntegerField(choices=choices, default=(0, 'default'))
+    result_type = models.IntegerField(choices=model_file_choices, default=(0, 'default'))
 
 class ModelCommit(models.Model):
     model = models.ForeignKey(Model, on_delete=models.CASCADE)

@@ -1,5 +1,5 @@
 """
-Definition of urls for Profile.
+Definition of urls for UserProfile.
 """
 
 from UserProfile import views as profile_view

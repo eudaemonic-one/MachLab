@@ -45,18 +45,17 @@
                 </div>
             </div>
         </div>
-                
+       
         <div class="file-navigation in-mid-page d-flex flex-items-start">
-            <div class="breadcrumb flex-auto"></div>
-            
             {% if request.user.is_authenticated %}
             {% if request.user.username == username %}
             <div class="BtnGroup">
-                <form id="upload-file-form" action="/models/upload" method="post" enctype="multipart/form-data">
+                <form id="upload-file-form" action="/models/upload" method="post" enctype="multipart/form-data" >
                     <script type="text/javascript">
                         function selectFile() { 
-                            document.getElementById("upload_file").click(); 
+                            document.getElementById("upload_files").click(); 
                         }
+
                         function uploadFile() { 
                             var option = {
                                 url : "/models/upload",
@@ -64,7 +63,7 @@
                                 datatype:'json',
                                 clearForm: true,
                                 //error:function(data){
-                                //   alert("文件上传请求失败！");
+                                //    alert("文件上传请求失败！");
                                 //}
                             };
                             $("#upload-file-form").ajaxSubmit(option);
@@ -73,9 +72,9 @@
                     {% csrf_token %}
                     <input type="hidden" name="username" value="{{username}}" />
                     <input type="hidden" name="model_name" value="{{model.model_name}}" />
-                    <input type="file" name="upload_file" id="upload_file" style="display:none" onchange="uploadFile()" />
+                    <input type="file" id="upload_file" name="upload_file" style="display:none" onchange="uploadFile()" />
                     <input type="button" class="btn btn-sm BtnGroup-item" value="Upload files" onclick="selectFile()" />
-                    <input type="hidden" name="next" value="/models/{{username}}/{{model.model_name}}" />
+                    <input type="hidden" id="next" name="next" value="/models/{{username}}/{{model.model_name}}" />
                 </form>
             </div>
             {% endif %}
@@ -85,27 +84,27 @@
                     {% csrf_token %}
                     <input type="hidden" name="username" value="{{username}}" />
                     <input type="hidden" name="model_name" value="{{model.model_name}}" />
-                    <input type="submit" class="btn btn-sm BtnGroup-item" value="Download files" />
+                    <input type="submit" class="btn btn-sm BtnGroup-item branch-select-menu" value="Download files" />
                     <input type="hidden" name="next" value="/models/{{username}}/{{model.model_name}}" />
                 </form>
             </div>
             {% endif %}
-  
+            <!--<div class="breadcrumb flex-auto"></div>
             <div class="branch-infobar">
-                <!--<span class="float-right">
+                <span class="float-right">
                     <a class="muted-link" href="">
                         <svg class="octicon octicon-diff" viewBox="0 0 13 16" version="1.1" width="13" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6 7h2v1H6v2H5V8H3V7h2V5h1v2zm-3 6h5v-1H3v1zM7.5 2L11 5.5V15c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V3c0-.55.45-1 1-1h6.5zM10 6L7 3H1v12h9V6zM8.5 0H3v1h5l4 4v8h1V4.5L8.5 0z"></path></svg>
                         Compare
                     </a>
-                </span>-->
+                </span>
                 This model has {{commit_count}} commits for {{model.model_name}}.
-            </div>
+            </div>-->
         </div>
             
         <div class="commit-tease js-details-container Details d-flex">
             <div class="AvatarStack flex-self-start ">
                 <div class="AvatarStack-body" aria-label="{{username}}">
-                    <a class="avatar" href="/{{username}}/">
+                    <a class="avatar" href="/{{username}}">
                         <img alt="@{{username}}" src="/static/media/{{avatar}}" width="20" height="20">
                     </a>  
                 </div>
@@ -113,7 +112,7 @@
 
             <div class="flex-auto f6 no-wrap mr-3">
                 <a href="" class="commit-author tooltipped tooltipped-s user-mention" aria-label="View all commits by {{username}}">{{username}}</a>
-                <a data-pjax="true" title="{{latestCommit.description}}" class="message" href="">{{latestCommit.description}}</a>
+                <p data-pjax="true" title="{{latestCommit.description}}" class="message" href="">{{latestCommit.description}}</p>
             </div>
             <div class="no-wrap">
                 Latest commit
@@ -128,14 +127,12 @@
                         <tr class="js-navigation-item" aria-selected="false">
                             <td class="icon">
                                 <svg class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
-                                </td>
+                            </td>
                             <td class="content">
-                                <span class="css-truncate css-truncate-target"><a class="js-navigation-open" title="{{modelfile.file}}" id="{{modelfile.filename}}" href="">{{modelfile.filename}}</a></span>
+                                <span class="css-truncate css-truncate-target"><a class="js-navigation-open" title="{{modelfile.file}}" id="{{modelfile.filename}}" href="/models/{{username}}/{{model.model_name}}/{{modelfile.filename}}">{{modelfile.filename}}</a></span>
                             </td>
                             <td class="message">
-                                <span class="css-truncate css-truncate-target">
-                                    <a data-pjax="true" title="{{modelfile.description}}" class="message" href="">&nbsp;{{modelfile.description}}</a>
-                                </span>
+                                <span class="css-truncate css-truncate-target">&nbsp;{{modelfile.description}}</span>
                             </td>
                             <td class="age">
                                 <span class="css-truncate css-truncate-target"><time-ago datetime="{{modelfile.modified_datetime}}" title="{{modelfile.modified_datetime}}">&nbsp;{{modelfile.modified_datetime}}</time-ago></span>

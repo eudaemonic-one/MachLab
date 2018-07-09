@@ -16,6 +16,9 @@ urlpatterns = [
     # Website Pages #
     url(r'^$', view.index, name='index'),
     
+    # Search Pages #
+    url(r'search/', include('Search.urls')),
+    
     # Docs Pages #
     url(r'docs/', include('Docs.urls')),
 
