@@ -1,0 +1,49 @@
+﻿<div class="container new-discussion-timeline experiment-repo-nav  ">
+    <div class="repository-content ">
+        <div class="navigation">
+            <div id="blob-path" class="breadcrumbMF">
+                <span class="repo-root js-repo-root">
+                    <span class="js-path-segment">
+                        <a data-pjax="true" href="/{{username}}">
+                            <span>{{username}}</span>
+                        </a>
+                    </span>
+                </span>
+
+                <span class="separator">/</span>
+
+                <span class="js-path-segment">
+                    <a data-pjax="true" href="/{{username}}/{{model_name}}">
+                        <span>{{model_name}}</span>
+                    </a>
+                </span>
+
+                <span class="separator">/</span>
+
+                <strong class="final-path">{{modelfile.filename}}</strong>
+            </div>
+        </div>
+
+        <div class="file">
+            <div class="file-header">
+                <div class="file-info">
+                    {{modelfile.lines_count}} lines
+                    <span class="file-info-divider"></span>
+                    {{modelfile.size}} B
+                </div>
+            </div>
+            <br />
+
+            <div itemprop="text" class="blob-wrapper data">
+                <table class="highlight tab-size js-file-line-container">
+                    <tbody>
+                        {% for line in modelfile.text %}
+                        <tr><td class="blob-num js-line-number" data-line-number="1">1</td><td>{{line}}</td></tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="seat" style="bottom:20px"></div>
+</div>

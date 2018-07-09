@@ -1,0 +1,75 @@
+﻿{% extends "base.html" %}
+
+{% block message %}
+{% endblock %}
+
+{% block main %}
+{% if alreadyExisted %}
+<div id="ajax-error-message" class="ajax-error-message flash flash-error">
+    <svg class="octicon octicon-alert" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg>
+    You can’t perform that action at this time. Please check if you have had created a model that contains the same model name with your current create request.
+</div>
+{% endif %}
+
+<div role="main" class="application-main ">
+    <div id="js-pjax-container" data-pjax-container="">
+        <div class="new-repo-container">
+            <form action="/models/{{request.user.username}}/new" method="post" accept-charset="UTF-8"  id="new_repository" class="js-braintree-encrypt">
+                {% csrf_token %}
+                <div class="Subhead">
+                    <h2 class="Subhead-heading">Create a new repository</h2>
+                    <p class="Subhead-description">
+                    A repository contains all the files for your project, including the revision history.
+                    </p>
+                </div>
+                
+                <div class="owner-reponame clearfix">
+                    <dl class="form-group float-left">
+                        <dt><label for="owner_RichardBrook24">Owner</label></dt>
+                        <dd>
+                            <div class="select-menu js-menu-container js-select-menu js-owner-container js-transitionable">
+                                <button class="btn select-menu-button with-gravatar js-menu-target" type="button" aria-haspopup="true" aria-expanded="false">
+                                    <div class="select-menu-button-gravatar js-select-button-gravatar">
+                                        <img src="/static/media/{{request.user.avatar}}" alt="@{{request.user.username}}" width="20" height="20">
+                                    </div>
+                                    <span class="js-select-button">{{request.user.username}}</span>
+                                </button>
+                            </div>
+                        </dd>
+                    </dl>
+
+                    <span class="slash js-with-permission-fields">/</span>
+
+                    <dl class="form-group float-left js-with-permission-fields">
+                        <dt class="input-label"><label autocapitalize="off" maxlength="100" autofocus="autofocus" for="model_name">Model name</label></dt>
+                        <dd>{{form.model_name}}</dd>
+                        <dd>{{form.model_name.error}}</dd>
+                    </dl>
+                    
+                    <dl class="form-group float-left js-with-permission-fields">
+                        <dt class="input-label"><label autocapitalize="off" maxlength="100" autofocus="autofocus" for="model_name">Model type</label></dt>
+                        <dd>{{form.model_type}}</dd>
+                        <dd>{{form.model_type.error}}}</dd>
+                    </dl>
+                </div>
+
+                <div class="js-with-permission-fields">
+                    <p class="my-2">Great model names are short and memorable.</p>
+
+                    <dl class="form-group">
+                        <dt class="input-label"><label for="model_description">Description <span class="note">(optional)</span></label></dt>
+                        <dd>{{form.description}}</dd>
+                        <dd>{{form.description.error}}</dd>
+                    </dl>
+
+                    <hr />
+
+                    <button type="submit" class="btn btn-primary first-in-line">
+                        Create Model
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

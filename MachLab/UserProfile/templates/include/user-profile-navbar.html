@@ -1,0 +1,23 @@
+﻿<div class="UnderlineNav user-profile-nav js-sticky top-0" style="position: static;">
+    <nav class="UnderlineNav-body" data-pjax="" role="navigation">
+        <a href="/{{username}}/" class="UnderlineNav-item selected" aria-selected="true" role="tab" title="Overview">
+            Overview
+        </a>
+        <a href="{% url 'repositories' %}" class="UnderlineNav-item " aria-selected="false" role="tab" title="Models">
+            Models
+            <span class="Counter">{{model_count}}</span>
+        </a>
+        <!--<a href="/{{username}}/?tab=stars" class="UnderlineNav-item " aria-selected="false" role="tab" title="Stars">
+            Stars
+            <span class="Counter">0</span>
+        </a>
+        <a href="/{{username}}/?tab=followers" class="UnderlineNav-item " aria-selected="false" role="tab" title="Followers">
+            Followers
+            <span class="Counter">0</span>
+        </a>
+        <a href="/{{username}}/?tab=following" class="UnderlineNav-item " aria-selected="false" role="tab" title="Following">
+            Following
+            <span class="Counter">0</span>
+        </a>-->
+    </nav>
+</div>

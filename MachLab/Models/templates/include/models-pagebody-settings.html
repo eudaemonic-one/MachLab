@@ -1,0 +1,92 @@
+﻿<div class="repository-content ">
+    <div class="columns">
+        <div id="options_bucket">
+            <div class="Subhead">
+                <h2 class="Subhead-heading">模型设置</h2>
+            </div>
+
+            <form class="d-flex js-edit-repo-container" action="" accept-charset="UTF-8" method="post">
+                {% csrf_token %}
+                
+                {% if alreadyExisted %}
+                <div class="flash flash-error">
+                    <div class="text-center">
+                        更新模型信息失败！
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="form-group">
+                    <label for="model_name">模型名称</label>
+                    {{ form.model_name }}
+                    {{ form.model_name.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="model_type">模型类型</label>
+                    {{ form.model_type }}
+                    {{ form.model_type.errors }}
+                </div>
+
+                <div class="form-group">
+                    <label for="description">模型描述</label>
+                    {{ form.description }}
+                    {{ form.description.errors }}
+                </div>
+                
+                <div class="settings-form-action">
+                    <button type="submit" class="btn btn-primary btn-block">确认更改</button>
+                </div>
+
+                <div class="settings-form-next">
+                    <input type="hidden" name="next" value="/models/{{username}}/{{model.model_name}}/settings" />
+                </div>
+            </form>
+
+            <div class="Subhead Subhead--spacious border-bottom-0 mb-0">
+                <h2 class="Subhead-heading">
+                Danger Zone
+                </h2>
+            </div>
+
+            <div class="Box Box--danger">
+                <ul>
+                    <li class="Box-row">
+                        <details class="details-reset details-overlay details-overlay-dark">
+                            <summary class="btn btn-danger boxed-action" aria-haspopup="dialog">
+                            Delete this model
+                            </summary>
+
+                            <details-dialog class="Box Box--overlay d-flex flex-column anim-fade-in fast" aria-label="Delete repository" role="dialog">
+                                <div class="Box-header">
+                                    <button class="Box-btn-octicon btn-octicon float-right" type="button" aria-label="Close dialog" data-close-dialog="">
+                                    <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"></path></svg>
+                                    </button>
+                                    <div class="Box-title">Are you absolutely sure?</div>
+                                </div>
+                                <div class="flash flash-warn flash-full">
+                                Unexpected bad things will happen if you don’t read this!
+                                </div>
+                                <div class="Box-body overflow-auto">
+                                    <p>
+                                    This action <strong>cannot</strong> be undone. This will permanently delete the <strong>{{username}}/{{model.model_name}}</strong>
+                                    and remove all associates.
+                                    </p>
+
+                                    <p>Please type in the name of the repository to confirm.</p>
+
+                                    <form class="js-normalize-submit" action="/models/{{username}}/{{model.model_name}}/settings/delete" accept-charset="UTF-8" method="post">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-block btn-danger">I understand the consequences, delete this model</button>
+                                        <input type="hidden" name="next" value="/" />
+                                    </form>      
+                                </div>
+                            </details-dialog>
+                        </details>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row"><br /><br /><br /><br /><br /><br /></div>
+</div>

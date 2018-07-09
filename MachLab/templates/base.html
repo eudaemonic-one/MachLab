@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>{{title}}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta itemprop="screenshot" content="http://localhost:7000/home-screenshot-mac-lg.png">
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <!-- Bootstrap & JQuery -->
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <script src="/static/js/jquery-3.3.1.js"></script>
+    <script src="/static/js/jquery.form.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap.js"></script>
+</head>
+<body class="home win">
+    <div id="main" itemscope="" itemtype="http://schema.org/WebApplication">
+        {# 头部导航栏 #}
+        {% block header%}
+        {% include "./include/header.html"%}
+        {% endblock%}
+    
+        {# 消息栏（默认隐藏） #}
+        {% block message%}
+        {# include "./include/message.html" #}
+        {% endblock%}
+
+        {# 主题内容 #}
+        {% block main%}
+        {% include "./include/main.html"%}
+        {% endblock%}
+    </div>
+
+    {# 底部导航栏 #}
+    {% block footer%}
+    {% include "./include/footer.html"%}
+    {% endblock%}
+</body>
+</html>

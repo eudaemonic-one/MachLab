@@ -1,0 +1,443 @@
+﻿.repohead.experiment-repo-nav {
+    padding-bottom: 0;
+    background-color: #fafbfc;
+}
+
+.reponav-item .Counter {
+    color: #444d56;
+}
+
+.js-selected-navigation-item .Counter {
+    color: #444d56;
+}
+
+.Counter {
+    display: inline-block;
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    color: #586069;
+    background-color: rgba(27,31,35,0.08);
+    border-radius: 20px;
+}
+
+.overall-summary-bottomless {
+    margin-bottom: 0;
+    border-bottom: 0;
+    border-radius: 3px 3px 0 0;
+}
+
+.overall-summary {
+    position: relative;
+    margin-bottom: 10px;
+    border: 1px solid #dfe2e5;
+    border-radius: 3px;
+}
+
+.stats-switcher-viewport {
+    height: 41px;
+    overflow: hidden;
+}
+
+.stats-switcher-wrapper {
+    position: relative;
+    top: 0;
+    transition: top 0.25s ease-in-out;
+}
+
+.numbers-summary {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+}
+
+    .numbers-summary li {
+        display: table-cell;
+        padding: 0;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    .numbers-summary a, .numbers-summary .nolink {
+        display: block;
+        padding: 10px 0;
+        color: #586069;
+        text-decoration: none;
+    }
+
+.repository-lang-stats {
+    position: relative;
+}
+
+ul, ol {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+button, html [type="button"], [type="reset"], [type="submit"] {
+    -webkit-appearance: button;
+}
+
+.btnM-sm {
+    padding: 3px 10px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.btnM {
+    color: #24292e;
+    background-color: #eff3f6;
+    background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+}
+
+.btnM {
+    position: relative;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-repeat: repeat-x;
+    background-position: -1px -1px;
+    background-size: 110% 110%;
+    border: 1px solid rgba(27,31,35,0.2);
+    border-radius: 0.25em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.file-navigation .branch-select-menu {
+    margin-right: 6px;
+    margin-bottom: 10px;
+}
+
+.file-navigation.in-mid-page {
+    margin-top: 15px;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+.flex-items-start {
+    align-items: flex-start !important;
+}
+
+.file-navigation .breadcrumb {
+    float: left;
+    margin-top: 0;
+    margin-left: 5px;
+    font-size: 16px;
+    line-height: 26px;
+}
+
+.flex-auto {
+    flex: 1 1 auto !important;
+}
+
+.breadcrumb {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #586069;
+}
+
+.commit-tease {
+    position: relative;
+    padding: 10px;
+    margin-bottom: -1px;
+    font-size: 13px;
+    line-height: 20px;
+    color: #586069;
+    background-color: #f1f8ff;
+    border: 1px solid #c8e1ff;
+    border-radius: 3px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.d-flex {
+    display: flex !important;
+}
+
+table.files {
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+    table.files td.icon {
+        width: 17px;
+        padding-right: 2px;
+        padding-left: 10px;
+        color: rgba(3,47,98,0.55);
+    }
+
+    table.files td {
+        padding: 6px 3px;
+        line-height: 20px;
+        border-top: 1px solid #eaecef;
+    }
+
+        table.files td.content {
+            max-width: 180px;
+        }
+
+        table.files td.message {
+            max-width: 442px;
+            padding-left: 10px;
+            overflow: hidden;
+            color: #6a737d;
+        }
+
+
+        table.files td.message {
+            max-width: 442px;
+            padding-left: 10px;
+            overflow: hidden;
+            color: #6a737d;
+        }
+
+        table.files td.age {
+            width: 125px;
+            padding-right: 10px;
+            color: #6a737d;
+            text-align: right;
+            white-space: nowrap;
+        }
+
+.file-wrap .include-fragment-error {
+    display: none;
+}
+
+.warning {
+    padding: .5em;
+    margin-bottom: 0.8em;
+    font-weight: 600;
+    background-color: #fffbdd;
+}
+
+.mb-1 {
+    margin-bottom: 4px !important;
+}
+
+.mb-0 {
+    margin-bottom: 20px !important;
+}
+
+.file-header {
+    padding: 5px 10px;
+    background-color: #fafbfc;
+    border-bottom: 1px solid #e1e4e8;
+}
+
+.file-navigation .breadcrumb {
+    float: left;
+    margin-top: 0;
+    margin-left: 5px;
+    font-size: 16px;
+    line-height: 26px;
+    width: 100%;
+}
+
+.file-navigation .breadcrumbMF {
+    float: left;
+    margin-top: 0;
+    margin-left: 5px;
+    font-size: 16px;
+    line-height: 26px;
+    width: 100%;
+}
+
+.breadcrumbMF {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #586069;
+}
+
+a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+.breadcrumbMF .repo-root {
+    font-weight: 600;
+}
+
+.tab-size[data-tab-size="8"] {
+    tab-size: 8;
+}
+
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 2px;
+    border-color: grey;
+}
+
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+
+.blob-wrapper {
+    overflow-x: auto;
+    overflow-y: hidden;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
+.file {
+    position: relative;
+    margin-top: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+}
+
+.blob-num {
+    width: 1%;
+    min-width: 50px;
+    padding-right: 10px;
+    padding-left: 10px;
+    font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
+    font-size: 12px;
+    line-height: 20px;
+    color: rgba(27,31,35,0.3);
+    text-align: right;
+    white-space: nowrap;
+    vertical-align: top;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.file-info-divider {
+    display: inline-block;
+    width: 1px;
+    height: 18px;
+    margin-right: 3px;
+    margin-left: 3px;
+    vertical-align: middle;
+    background-color: #ddd;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.btnCo-primary {
+    color: #fff;
+    background-color: #28a745;
+    background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
+}
+
+.btnCo {
+    position: relative;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-repeat: repeat-x;
+    background-position: -1px -1px;
+    background-size: 110% 110%;
+    border: 1px solid rgba(27,31,35,0.2);
+    border-radius: 0.25em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.avatar {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 1;
+    vertical-align: middle;
+    border-radius: 3px;
+}
+
+.rounded-1 {
+    border-radius: 3px !important;
+}
+
+img {
+    border-style: none;
+}
+
+.timeline-comment-header-text {
+    max-width: 78%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.text-normal {
+    font-weight: 400 !important;
+}
+
+.f5 {
+    font-size: 14px !important;
+}
+
+.timeline-comment.current-user .timeline-comment-header {
+    background-color: #f1f8ff;
+    border-bottom-color: #c0d3eb;
+}
+
+.timeline-comment-header {
+    padding-right: 15px;
+    padding-left: 15px;
+    color: #586069;
+    background-color: #f6f8fa;
+    border-bottom: 1px solid #d1d5da;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.octicon {
+    vertical-align: text-bottom;
+}
+
+.octicon {
+    display: inline-block;
+    vertical-align: text-top;
+    fill: currentColor;
+}

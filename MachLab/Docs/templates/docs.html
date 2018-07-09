@@ -1,0 +1,22 @@
+﻿{% extends "base.html" %}
+
+{% block message%}
+{% endblock%}
+
+{% block main%}
+<div role="main" id="main-content">
+    <div class="container body-content docs">
+        <div class="row">
+            {% block docs-navbar%}
+            {% include "./include/docs-navbar.html"%}
+            {% endblock%}
+
+            {% block docs-body%}
+            {% include "./include/docs-overview.html"%}
+            {% endblock%}
+        </div>
+    </div>
+
+    <div class="column"><br /><br /><br /></div>
+</div>
+{% endblock%}

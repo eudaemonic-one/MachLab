@@ -1,0 +1,60 @@
+﻿{% extends "base.html" %}
+
+{% block message %}
+{% endblock %}
+
+{% block main %}
+    <link rel="stylesheet" type="text/css" href="/static/css/account-style.css">
+    <div class="container">
+        <div class="row clearfix">
+            <div class="col-md-4 column">
+            </div>
+            <div class="col-md-4 column">
+                <img height="140" width="140" src="/static/img/logo.png" class="img-responsive center-block" />
+                <h3 class="text-center">
+                    注册您的账号
+                </h3>
+                {% if alreadyRegistered %}
+                <div class="register-form-error">
+                    <div class="text-center">
+                        注册失败！该用户已被注册！请尝试登录到<a href="{% url 'login'%}">MachLab</a>！
+                    </div>
+                </div>
+                {% endif %}
+                <form action="" method="post" class="auth-form-body mt-3">
+                    {% csrf_token %}
+                    <div class="card register-form">
+                        <div class="field register-form-email">
+                            <label for="id_email">Email address</label>
+                            {{ form.email }}
+                            {{ form.email.errors }}
+                        </div>
+                        <div class="field register-form-username">
+                            <label for="id_username">Username</label>
+                            {{ form.username }}
+                            {{ form.username.errors }}
+                        </div>
+                        <div class="field register-form-password">
+                            <label for="id_password">Password</label>
+                            {{ form.password }}
+                            {{ form.password.errors }}
+                        </div>
+                        <div class="register-form-action mt-3">
+                            <button type="submit" class="btn btn-primary btn-block">注册</button>
+                        </div>
+                        <div class="register-form-next">
+                            <input type="hidden" name="next" value="/" />
+                        </div>
+                    </div>
+                    <div class="register-links mt-3">
+                        <a href="{% url 'login'%}" rel="external">登录</a>
+                        <a href="{% url 'index'%}" rel="external" class="logged-out-form-back-link">←返回 MachLab 首页</a>
+                    </div>
+                </form>
+                <p class="create-account-callout mt-3">如已有账号，请尝试<a href="{% url 'login'%}">MachLab</a>！</p>
+            </div>
+            <div class="col-md-4 column">
+            </div>
+        </div>
+    </div>
+{% endblock %}
