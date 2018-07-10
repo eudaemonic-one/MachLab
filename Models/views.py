@@ -179,12 +179,14 @@ def upload_modelfile(request, username, model_name):
     user = User.objects.get(username=username)
     
     filename = upload_file.name
-    data = upload_file.file.read()
-    data.replace(' ', '&nbsp;')
     file = open(filename, 'wt')
-    file.write(data)
+    lines = upload_file.file.readlines()
+    for line in lines:
+        line.replace(' ', '&nbsp;')
+        file.write(line)
     file.close()
-    modelfile = Modelfile.objects.create(model=model, filename=filename, file=file, description=filename)
+
+    modelfile = Modelfile.objects.create(model=model, filename=filename, file=ContentFile(data), description=filename)
     modelfile.save()
 
     model_push = ModelPush.objects.create(push_name='upload '+len(upload_files)+' file(s) into '+model_name, model=model, user=user, description='upload modelfile')

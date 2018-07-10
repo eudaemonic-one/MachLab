@@ -25,9 +25,6 @@ urlpatterns = [
     # Account Pages #
     url(r'^account/', include('Account.urls')),
     
-    # Settings Pages #
-    url(r'^settings/', include('Settings.urls')),
-    
     # Download Pages #
     url(r'^download/$', view.download, name='download'),
     
