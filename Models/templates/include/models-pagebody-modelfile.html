@@ -38,7 +38,10 @@
                 <table class="highlight tab-size js-file-line-container">
                     <tbody>
                         {% for line in modelfile.text %}
-                        <tr><td class="blob-num js-line-number" data-line-number="1">1</td><td>{{line}}</td></tr>
+                        <tr>
+                            <td id="L{{ forloop.counter }}" class="blob-num js-line-number" data-line-number="{{ forloop.counter }}">{{ forloop.counter }}</td>
+                            <td><pre style="padding:1px;margin:0px;border:0px;background-color:#fff;"><code>{{ line }}</code></pre></td>
+                        </tr>
                         {% endfor %}
                     </tbody>
                 </table>

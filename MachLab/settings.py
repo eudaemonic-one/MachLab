@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'MachLab',
     'Docs',
     'Account',
-    'Settings',
     'UserProfile',
     'Models',
     'Search',

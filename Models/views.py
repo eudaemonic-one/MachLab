@@ -71,8 +71,14 @@ def modelfile(request, username, model_name, modelfile_filename):
     model = Model.objects.filter(user=user, model_name=model_name).first()
     context['model'] = model
     modelfile = Modelfile.objects.filter(model=model, filename=modelfile_filename).first()
-    modelfile.text = modelfile.file.readlines()
-    modelfile.lines_count = len(modelfile.text)
+    lines = modelfile.file.readlines()
+    modelfile.lines_count = len(lines)
+    for i in range(modelfile.lines_count):
+        line_text = str(lines[i], encoding = "utf-8")
+        line_text = line_text.replace(' ', ' ')
+        lines[i] = line_text
+    modelfile.text = lines
+    modelfile.lines_range = range(modelfile.lines_count)
     modelfile.size = modelfile.file.size
     context['modelfile'] = modelfile
     get_model_info(context, request, username, model_name)
@@ -168,8 +174,6 @@ def settings(request, username, model_name):
 def upload_modelfile(request, username, model_name):
     context = {}
     context['title'] = '上传 | MachLab'
-    #username = request.POST.get('username')
-    #model_name = request.POST.get('model_name')
     context['username'] = username
     context['model_name'] = model_name
     redirect_to = request.POST.get('next', request.GET.get('next',''))
@@ -179,15 +183,13 @@ def upload_modelfile(request, username, model_name):
     user = User.objects.get(username=username)
     
     filename = upload_file.name
+    modelfile = Modelfile.objects.create(model=model, filename=filename, description=filename)
     data = upload_file.file.read()
-    data.replace(' ', '&nbsp;')
-    file = open(filename, 'wt')
-    file.write(data)
-    file.close()
-    modelfile = Modelfile.objects.create(model=model, filename=filename, file=file, description=filename)
+    file = ContentFile(data)
+    modelfile.file.save(filename, file)
     modelfile.save()
 
-    model_push = ModelPush.objects.create(push_name='upload '+len(upload_files)+' file(s) into '+model_name, model=model, user=user, description='upload modelfile')
+    model_push = ModelPush.objects.create(push_name='upload '+len(upload_file)+' file(s) into '+model_name, model=model, user=user, description='upload modelfile')
     model_push.save()
 
     return models(request, username, model_name)
@@ -195,8 +197,6 @@ def upload_modelfile(request, username, model_name):
 def download_model(request, username, model_name):
     context = {}
     context['title'] = '下载 | MachLab'
-    #username = request.POST.get('username')
-    #model_name = request.POST.get('model_name')
     context['username'] = username
     context['model_name'] = model_name
     redirect_to = request.POST.get('next', request.GET.get('next',''))

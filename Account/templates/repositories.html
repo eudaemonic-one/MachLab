@@ -1,0 +1,25 @@
+﻿{% extends "base.html" %}
+
+{% block message %}
+{% endblock %}
+
+{% block main %}
+<div role="main" id="main-content">
+    <div class="container body-content docs">
+        <div class="row clearfix">
+            <div class="col-md-1 column">
+            </div>
+            <div class="col-md-2 column">
+                {% block settings-navbar%}
+                {% include "./include/settings-navbar.html"%}
+                {% endblock%}
+            </div>
+            <div class="col-md-8 column">
+                {% block settings-body%}
+                {% include "./include/settings-models.html"%}
+                {% endblock%}
+            </div>
+        </div>
+    </div>
+</div> 
+{% endblock %}

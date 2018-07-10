@@ -22,12 +22,12 @@ urlpatterns = [
     # Model Insights #
     url(r'(.*?)/(.*?)/insights$', models_view.insights),
 
+    # Modelfiles #
+    url(r'(.*?)/(.*?)/(.*?)/$', models_view.modelfile),
+    
     # Model Profile #
     url(r'(.*?)/(.*?)/$', models_view.models, name='models'),
     
-    # Modelfiles #
-    url(r'(.*?)/(.*?)/(.*?)/$', models_view.modelfile),
-
     # Comments #
     url(r'(.*?)/(.*?)/comments/new$', models_view.new_comment, name='new-comment'),
     url(r'(.*?)/(.*?)/comments/delete$', models_view.delete_comment, name='delete-comment'),
