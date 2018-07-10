@@ -1,7 +1,7 @@
 ﻿<div class="container new-discussion-timeline experiment-repo-nav  ">
     <div class="repository-content ">
-        <div class="file-navigation">
-            <div id="blob-path" class="breadcrumb">
+        <div class="navigation">
+            <div id="blob-path" class="breadcrumbMF">
                 <span class="repo-root js-repo-root">
                     <span class="js-path-segment">
                         <a data-pjax="true" href="/{{username}}">
@@ -32,14 +32,13 @@
                     {{modelfile.size}} B
                 </div>
             </div>
-
             <br />
 
             <div itemprop="text" class="blob-wrapper data">
                 <table class="highlight tab-size js-file-line-container">
                     <tbody>
                         {% for line in modelfile.text %}
-                        <tr><td>{{line}}</td></tr>
+                        <tr><td class="blob-num js-line-number" data-line-number="1">1</td><td>{{line}}</td></tr>
                         {% endfor %}
                     </tbody>
                 </table>

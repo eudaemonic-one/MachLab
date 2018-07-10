@@ -1,22 +1,9 @@
-﻿{% extends "base.html" %}
+﻿{% extends "models.html" %}
 
-{% block message %}
-{% endblock %}
+{% block models-pagehead%}
+{% include "./include/models-pagehead.html"%}
+{% endblock%}
 
-{% block main %}
-<link rel="stylesheet" type="text/css" href="/static/css/models.css">
-
-<div role="main" class="application-main ">
-    <div itemscope="" itemtype="http://schema.org/SoftwareSourceCode" class="">
-        <div id="js-repo-pjax-container" data-pjax-container="">
-            {% block models-pagehead%}
-            {% include "./include/models-pagehead.html"%}
-            {% endblock%}
-
-            {% block models-pagebody%}
-            {% include "./include/models-pagebody-files.html"%}
-            {% endblock%}
-        </div>
-    </div>
-</div>
-{% endblock %}
+{% block models-pagebody%}
+{% include "./include/models-pagebody-files.html"%}
+{% endblock%}

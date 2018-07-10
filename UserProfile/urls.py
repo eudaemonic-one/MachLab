@@ -9,6 +9,3 @@ urlpatterns = [
     # Models Pages #
     url(r'^$', profile_view.user_profile, name='user-profile'),
 ]
-
-
-

@@ -199,6 +199,10 @@ button, .link-button {
     cursor: pointer
 }
 
+#main {
+    margin-bottom: 135px;
+}
+
 .main-container {
     min-height: 100%;
     position: relative
@@ -829,6 +833,7 @@ body {
 
 footer {
     position: absolute;
+    z-index: 1000;
     left: 0;
     bottom: 0;
     height: 135px;
@@ -1972,7 +1977,7 @@ ul.video-list {
 }
 
     .home .value-props .value-prop-icon {
-        background-image: url("/assets/icons/valueprops-top-sprite.svg");
+        background-image: url("/static/icons/valueprops-top-sprite.svg");
         background-repeat: no-repeat;
         width: 5rem;
         height: 5rem;

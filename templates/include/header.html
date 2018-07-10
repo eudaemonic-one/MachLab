@@ -1,5 +1,4 @@
-﻿
-<a role="button" id="skip-to-content" class="link-button" href="#main-content">Skip to content<i>&nbsp;</i><span class="glyphicon glyphicon-menu-down"></span></a>
+﻿<a role="button" id="skip-to-content" class="link-button" href="#main-content">Skip to content<i>&nbsp;</i><span class="glyphicon glyphicon-menu-down"></span></a>
 <div class="navbar-fixed-container">
     <div class="navbar navbar-inverse navbar-fixed-top affix-top" data-spy="affix" data-offset-top="1">
         <nav role="navigation">
@@ -10,16 +9,17 @@
           	    <div class="navbar-collapse collapse">
           	        <ul class="nav navbar-nav navbar-left">
           	            <li><a id="nav-docs" href="{% url 'docs' %}">Docs</a></li>
-          	            <li><a id="nav-updates" href="">Models</a></li>
+          	            <li><a id="nav-updates" href="{% url 'culling' %}">Models</a></li>
           	            <li><a id="nav-faqs" href="{% url 'faq' %}">FAQ</a></li>
           	            <!--<li class="search visible-xs"><a href="/search">Search</a></li>-->
           	        </ul>
           	
           	        <ul class="nav navbar-nav navbar-right">
           	            <li class="search">
-          	                <form class="nav-search search-form">
+          	                <form class="nav-search search-form" action="/search" method="get">
           	                    <div class="input-group">
           	                        <input name="q" class="search-box form-control" placeholder="Search Models" type="text">
+          	                        <input name="type" value="" type="hidden">
           	                        <span class="input-group-btn">
           	                            <button tabindex="0" class="btn" type="submit" aria-label="Search">
           	                                    <img class="search-icon" src="/static/icons/search.svg" alt="Search" width="16px" height="16px">

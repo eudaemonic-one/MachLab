@@ -13,28 +13,28 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
     
+    # Search Pages #
+    url(r'^search/', include('Search.urls')),
+
+    # Docs Pages #
+    url(r'^docs/', include('Docs.urls')),
+
+    # Models Pages #
+    url(r'^models/', include('Models.urls')),
+
+    # Account Pages #
+    url(r'^account/', include('Account.urls')),
+    
+    # Settings Pages #
+    url(r'^settings/', include('Settings.urls')),
+    
+    # Download Pages #
+    url(r'^download/$', view.download, name='download'),
+    
+    # User Profile Pages #
+    url(r'^(.*?)/', include('UserProfile.urls')),
+    
     # Website Pages #
     url(r'^$', view.index, name='index'),
     
-    # Search Pages #
-    url(r'search/', include('Search.urls')),
-    
-    # Docs Pages #
-    url(r'docs/', include('Docs.urls')),
-
-    # Download Pages #
-    url(r'download/', view.download, name='download'),
-    
-    # Models Pages #
-    url(r'models/', include('Models.urls')),
-
-    # Account Pages #
-    url(r'account/', include('Account.urls')),
-    
-    # Settings Pages #
-    url(r'settings/', include('Settings.urls')),
-
-    # Profile Pages #
-    url(r'(.*?)/', include('UserProfile.urls')),
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

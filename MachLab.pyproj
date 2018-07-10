@@ -65,6 +65,16 @@
     <Compile Include="Models\urls.py" />
     <Compile Include="Models\views.py" />
     <Compile Include="Models\__init__.py" />
+    <Compile Include="Search\admin.py" />
+    <Compile Include="Search\apps.py" />
+    <Compile Include="Search\migrations\__init__.py" />
+    <Compile Include="Search\models.py" />
+    <Compile Include="Search\tests.py" />
+    <Compile Include="Search\urls.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Search\views.py" />
+    <Compile Include="Search\__init__.py" />
     <Compile Include="Settings\admin.py" />
     <Compile Include="Settings\apps.py" />
     <Compile Include="Settings\migrations\__init__.py" />
@@ -97,6 +107,9 @@
     <Folder Include="Models\migrations\" />
     <Folder Include="Models\templates\" />
     <Folder Include="Models\templates\include\" />
+    <Folder Include="Search\" />
+    <Folder Include="Search\migrations\" />
+    <Folder Include="Search\templates\" />
     <Folder Include="static\" />
     <Folder Include="static\admin\" />
     <Folder Include="static\admin\css\" />
@@ -157,6 +170,7 @@
     <Content Include="Models\templates\settings.html" />
     <Content Include="requirements.txt" />
     <Content Include="db.sqlite3" />
+    <Content Include="Search\templates\search.html" />
     <Content Include="Settings\templates\account.html" />
     <Content Include="Settings\templates\applications.html" />
     <Content Include="Settings\templates\include\settings-account.html" />
@@ -249,12 +263,14 @@
     <Content Include="static\icons\expand-up.svg" />
     <Content Include="static\icons\search.svg" />
     <Content Include="static\icons\search_dark.svg" />
+    <Content Include="static\icons\valueprops-top-sprite.svg" />
     <Content Include="static\img\linux-logo.png" />
     <Content Include="static\img\logo.png" />
     <Content Include="static\img\mac-logo.svg" />
     <Content Include="static\img\windows-logo.png" />
     <Content Include="static\js\bootstrap.js" />
     <Content Include="static\js\bootstrap.min.js" />
+    <Content Include="static\js\JavaScript.js" />
     <Content Include="static\js\jquery-3.3.1.js" />
     <Content Include="static\js\jquery.form.js" />
     <Content Include="static\js\npm.js" />
@@ -269,7 +285,6 @@
     <Content Include="templates\include\main.html" />
     <Content Include="templates\include\message.html" />
     <Content Include="templates\index.html" />
-    <Content Include="templates\search.html" />
     <Content Include="UserProfile\templates\include\profile-navbar.html" />
     <Content Include="UserProfile\templates\include\user-profile-body.html" />
     <Content Include="UserProfile\templates\include\user-profile-navbar.html" />

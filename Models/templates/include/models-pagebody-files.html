@@ -47,47 +47,47 @@
         </div>
        
         <div class="file-navigation in-mid-page d-flex flex-items-start">
-            {% if request.user.is_authenticated %}
-            {% if request.user.username == username %}
-            <div class="BtnGroup">
-                <form id="upload-file-form" action="/models/upload" method="post" enctype="multipart/form-data" >
-                    <script type="text/javascript">
-                        function selectFile() { 
-                            document.getElementById("upload_files").click(); 
-                        }
+            <div class="breadcrumb flex-auto"></div>
 
-                        function uploadFile() { 
-                            var option = {
-                                url : "/models/upload",
-                                type : 'POST',
-                                datatype:'json',
-                                clearForm: true,
-                                //error:function(data){
-                                //    alert("文件上传请求失败！");
-                                //}
-                            };
-                            $("#upload-file-form").ajaxSubmit(option);
-                        }
-                    </script>
-                    {% csrf_token %}
-                    <input type="hidden" name="username" value="{{username}}" />
-                    <input type="hidden" name="model_name" value="{{model.model_name}}" />
-                    <input type="file" id="upload_file" name="upload_file" style="display:none" onchange="uploadFile()" />
-                    <input type="button" class="btn btn-sm BtnGroup-item" value="Upload files" onclick="selectFile()" />
-                    <input type="hidden" id="next" name="next" value="/models/{{username}}/{{model.model_name}}" />
-                </form>
-            </div>
-            {% endif %}
+            {% if request.user.is_authenticated %}
+                {% if request.user.username == username %}
+                <div class="BtnGroup">
+                    <form id="upload-file-form" action="/models/{{username}}/{{model.model_name}}/upload" method="post" enctype="multipart/form-data" >
+                        <script type="text/javascript">
+                            function selectFile() { 
+                                document.getElementById("upload_file").click(); 
+                            }
+
+                            function uploadFile() { 
+                                var option = {
+                                    url : "/models/{{username}}/{{model.model_name}}/upload",
+                                    type : 'POST',
+                                    datatype:'json',
+                                    clearForm: true,
+                                    error:function(data){
+                                        alert("文件上传请求失败！");
+                                    }
+                                };
+                                $("#upload-file-form").ajaxSubmit(option);
+                            }
+                        </script>
+                        {% csrf_token %}
+                        <input type="file" id="upload_file" name="upload_file" style="display:none" onchange="uploadFile()" />
+                        <input type="button" class="btnM btnM-sm BtnGroup-item" value="Upload files" onclick="selectFile()" />
+                        <input type="hidden" id="next" name="next" value="/models/{{username}}/{{model.model_name}}" />
+                    </form>
+                </div>
+                {% endif %}
                 
-            <div class="BtnGroup">
-                <form action="/models/download" method="post" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <input type="hidden" name="username" value="{{username}}" />
-                    <input type="hidden" name="model_name" value="{{model.model_name}}" />
-                    <input type="submit" class="btn btn-sm BtnGroup-item branch-select-menu" value="Download files" />
-                    <input type="hidden" name="next" value="/models/{{username}}/{{model.model_name}}" />
-                </form>
-            </div>
+                <div class="BtnGroup">
+                    <form action="/models/{{username}}/{{model.model_name}}/download" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="username" value="{{username}}" />
+                        <input type="hidden" name="model_name" value="{{model.model_name}}" />
+                        <input type="submit" class="btnM btnM-sm BtnGroup-item branch-select-menu" value="Download files" />
+                        <input type="hidden" name="next" value="/models/{{username}}/{{model.model_name}}" />
+                    </form>
+                </div>
             {% endif %}
             <!--<div class="breadcrumb flex-auto"></div>
             <div class="branch-infobar">
@@ -112,7 +112,7 @@
 
             <div class="flex-auto f6 no-wrap mr-3">
                 <a href="" class="commit-author tooltipped tooltipped-s user-mention" aria-label="View all commits by {{username}}">{{username}}</a>
-                <p data-pjax="true" title="{{latestCommit.description}}" class="message" href="">{{latestCommit.description}}</p>
+                <span data-pjax="true" title="{{latestCommit.description}}" class="message" href="">{{latestCommit.description}}</span>
             </div>
             <div class="no-wrap">
                 Latest commit
@@ -129,7 +129,7 @@
                                 <svg class="octicon octicon-file" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M6 5H2V4h4v1zM2 8h7V7H2v1zm0 2h7V9H2v1zm0 2h7v-1H2v1zm10-7.5V14c0 .55-.45 1-1 1H1c-.55 0-1-.45-1-1V2c0-.55.45-1 1-1h7.5L12 4.5zM11 5L8 2H1v12h10V5z"></path></svg>
                             </td>
                             <td class="content">
-                                <span class="css-truncate css-truncate-target"><a class="js-navigation-open" title="{{modelfile.file}}" id="{{modelfile.filename}}" href="/models/{{username}}/{{model.model_name}}/{{modelfile.filename}}">{{modelfile.filename}}</a></span>
+                                <span class="css-truncate css-truncate-target"><a class="js-navigation-open" title="{{modelfile.file}}" id="{{modelfile.filename}}" href="/models/{{username}}/{{model.model_name}}/{{modelfile.filename}}/">{{modelfile.filename}}</a></span>
                             </td>
                             <td class="message">
                                 <span class="css-truncate css-truncate-target">&nbsp;{{modelfile.description}}</span>
