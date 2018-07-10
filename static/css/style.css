@@ -828,10 +828,11 @@ body {
 }
 
 footer {
-    position: absolute;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     bottom: 0;
-    height: 135px;
+    height: 130px;
     width: 100%
 }
 
@@ -1972,7 +1973,7 @@ ul.video-list {
 }
 
     .home .value-props .value-prop-icon {
-        background-image: url("/assets/icons/valueprops-top-sprite.svg");
+        background-image: url("/static/icons/valueprops-top-sprite.svg");
         background-repeat: no-repeat;
         width: 5rem;
         height: 5rem;
