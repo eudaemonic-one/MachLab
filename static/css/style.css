@@ -199,6 +199,10 @@ button, .link-button {
     cursor: pointer
 }
 
+#main {
+    margin-bottom: 135px;
+}
+
 .main-container {
     min-height: 100%;
     position: relative
@@ -828,11 +832,11 @@ body {
 }
 
 footer {
-    position: fixed;
+    position: absolute;
     z-index: 1000;
     left: 0;
     bottom: 0;
-    height: 130px;
+    height: 135px;
     width: 100%
 }
 

@@ -270,6 +270,7 @@
     <Content Include="static\img\windows-logo.png" />
     <Content Include="static\js\bootstrap.js" />
     <Content Include="static\js\bootstrap.min.js" />
+    <Content Include="static\js\JavaScript.js" />
     <Content Include="static\js\jquery-3.3.1.js" />
     <Content Include="static\js\jquery.form.js" />
     <Content Include="static\js\npm.js" />

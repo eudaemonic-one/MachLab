@@ -179,7 +179,7 @@ def upload_modelfile(request, username, model_name):
     user = User.objects.get(username=username)
     
     filename = upload_file.name
-    data = upload_file.file.readlines()
+    data = upload_file.file.read()
     data.replace(' ', '&nbsp;')
     file = open(filename, 'wt')
     file.write(data)
@@ -232,7 +232,7 @@ def download_model(request, username, model_name):
     response['Content-Disposition'] = 'attachment;filename=' + parse.quote(zip_name)
     return response
 
-def new_model(request, username):
+def create_model(request, username):
     context = {}
     context['title'] = '创建模型 | MachLab'
     context['username'] = username
@@ -291,7 +291,7 @@ def new_comment(request, username, model_name):
     comments = Comment.objects.filter(model=model)
     target = None
     for comment in comments:
-        if comment.id == int(target_id):
+        if str(comment.id) == target_id:
             target = comment
             break
     
