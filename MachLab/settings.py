@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'Account',
     'Settings',
     'UserProfile',
-    'Models'
+    'Models',
+    'Search',
 ]
 
 MIDDLEWARE_CLASSES = [

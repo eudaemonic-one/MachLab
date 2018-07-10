@@ -19,10 +19,11 @@ class Model(models.Model):
     model_name = models.CharField(max_length=32)
     model_type = models.IntegerField(choices=model_type_choices, default=(0, 'default'), blank=True)
     description = models.TextField(max_length=256, blank=True, null=True)
+    star_count = models.IntegerField(default=0)
     modified_datetime = models.DateTimeField(auto_now=True)
  
     class Meta:
-        ordering = ['-modified_datetime']
+        ordering = ['-star_count']
 
     def __str__(self):
         return self.model_name
@@ -78,6 +79,11 @@ class Comment(models.Model):
 
     def __str__(self):
         return str(self.content)
+ 
+class Star(models.Model):
+    model = models.ForeignKey(Model, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    starred_datetime = models.DateTimeField(auto_now_add=True)
 
 class MyUserManager(BaseUserManager):
     def create_user(self, username, email, password):

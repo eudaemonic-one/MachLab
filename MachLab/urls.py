@@ -18,7 +18,7 @@ urlpatterns = [
     
     # Search Pages #
     url(r'search/', include('Search.urls')),
-    
+
     # Docs Pages #
     url(r'docs/', include('Docs.urls')),
 
@@ -36,5 +36,5 @@ urlpatterns = [
 
     # Profile Pages #
     url(r'(.*?)/', include('UserProfile.urls')),
-
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
