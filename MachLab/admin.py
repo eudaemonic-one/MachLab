@@ -4,7 +4,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.contrib.auth.models import User
-from MachLab.models import Userinfo, Model, Modelfile, ModelResult, ModelCommit, ModelPush, ModelPull, ModelDrop, Comment, Star
+from MachLab.models import Userinfo, Model, Modelfile, ModelResult, ModelCommit, ModelPush, ModelPull, ModelDrop, Comment, Star, ClientPackage
 
 class UserinfoInline(admin.StackedInline):
     model = Userinfo
@@ -55,3 +55,4 @@ admin.site.register(ModelPull)
 admin.site.register(ModelDrop)
 admin.site.register(Comment)
 admin.site.register(Star)
+admin.site.register(ClientPackage)

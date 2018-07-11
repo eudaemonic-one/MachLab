@@ -210,10 +210,10 @@ def account_password(request):
                     context['oldPasswordWrong'] = True
             else:
                 context['confirmPasswordWrong'] = True
-            return render(request, 'account.html', context)
+            return render(request, 'password.html', context)
     else:
         context['form'] = AccountForm()
-        return render(request, 'account.html', context)
+        return render(request, 'password.html', context)
 
 def account_repositories(request):
     context = {}

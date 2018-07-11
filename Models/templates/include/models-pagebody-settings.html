@@ -1,41 +1,33 @@
-﻿<div class="repository-content ">
+﻿<div class="repository-content container">
     <div class="columns">
         <div id="options_bucket">
             <div class="Subhead">
-                <h2 class="Subhead-heading">模型设置</h2>
+                <h2 class="Subhead-heading">Model Setting</h2>
             </div>
-
-            <form class="d-flex js-edit-repo-container" action="" accept-charset="UTF-8" method="post">
-                {% csrf_token %}
-                
-                {% if alreadyExisted %}
+            {% if alreadyExisted %}
                 <div class="flash flash-error">
-                    <div class="text-center">
-                        更新模型信息失败！
+                    <div class="text-center ">
+                        Update model settings failed!
                     </div>
                 </div>
                 {% endif %}
-
-                <div class="form-group">
-                    <label for="model_name">模型名称</label>
+            <form class="js-edit-repo-container po-re" action="" accept-charset="UTF-8" method="post">
+                {% csrf_token %}
+                <div class="form-group d-flex ">
+                    <label for="model_name">Model Name  </label>
                     {{ form.model_name }}
                     {{ form.model_name.errors }}
-                </div>
-
-                <div class="form-group">
-                    <label for="model_type">模型类型</label>
+                    <label for="model_type">Model Type  </label>
                     {{ form.model_type }}
                     {{ form.model_type.errors }}
                 </div>
-
-                <div class="form-group">
-                    <label for="description">模型描述</label>
+                <div class="form-group changLi">
+                    <label for="description">Description</label>
                     {{ form.description }}
                     {{ form.description.errors }}
                 </div>
-                
                 <div class="settings-form-action">
-                    <button type="submit" class="btn btn-primary btn-block">确认更改</button>
+                    <button type="submit" class="btnIS btnIS-primary ">Submit</button>
                 </div>
 
                 <div class="settings-form-next">
@@ -53,14 +45,25 @@
                 <ul>
                     <li class="Box-row">
                         <details class="details-reset details-overlay details-overlay-dark">
-                            <summary class="btn btn-danger boxed-action" aria-haspopup="dialog">
+                            <summary class="btnIS btnIS-danger boxed-action" aria-haspopup="dialog">
                             Delete this model
                             </summary>
 
+                            <div id="delete-panel">
                             <details-dialog class="Box Box--overlay d-flex flex-column anim-fade-in fast" aria-label="Delete repository" role="dialog">
                                 <div class="Box-header">
-                                    <button class="Box-btn-octicon btn-octicon float-right" type="button" aria-label="Close dialog" data-close-dialog="">
-                                    <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"></path></svg>
+                                    <script>
+                                        $(document).ready(function(){
+                                            $("#delete-octicon").click(function(){
+                                                $("#delete-panel").hide();
+                                            });
+                                            $(".btnIS-danger").click(function(){
+                                                $("#delete-panel").show();
+                                            });
+                                        });
+                                    </script>
+                                    <button id="delete-octicon" class="Box-btnIS-octicon btnIS-octicon float-right" type="button" aria-label="Close dialog" data-close-dialog="">
+                                        <svg class="octicon octicon-x" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M7.48 8l3.75 3.75-1.48 1.48L6 9.48l-3.75 3.75-1.48-1.48L4.52 8 .77 4.25l1.48-1.48L6 6.52l3.75-3.75 1.48 1.48L7.48 8z"></path></svg>
                                     </button>
                                     <div class="Box-title">Are you absolutely sure?</div>
                                 </div>
@@ -77,11 +80,12 @@
 
                                     <form class="js-normalize-submit" action="/models/{{username}}/{{model.model_name}}/settings/delete" accept-charset="UTF-8" method="post">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn btn-block btn-danger">I understand the consequences, delete this model</button>
+                                        <button type="submit" class="btnIS btnIS-block btnIS-danger">I understand the consequences, delete this model</button>
                                         <input type="hidden" name="next" value="/" />
                                     </form>      
                                 </div>
                             </details-dialog>
+                            </div>
                         </details>
                     </li>
                 </ul>

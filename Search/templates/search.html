@@ -4,16 +4,17 @@
 {% endblock %}
 
 {% block main %}
+<link rel="stylesheet" type="text/css" href="/static/css/search.css">
 <div role="main" class="application-main ">
     <div id="js-pjax-container" data-pjax-container="">
         <div class="container mt-4">
             <div class="columns">
                 <div class="column one-fourth">
                     <nav class="menu border" data-pjax="">
-                    <a class="menu-item selected" href="/search?q={{q}}&amp;type=Models">Models<span class="Counter ml-1 mt-1">{{result_model_count}}</span></a>
-                    <a class="menu-item " href="/search?q={{q}}&amp;type=Modelfiles">Filename<span class="Counter ml-1 mt-1">{{result_modelfile_count}}</span></a>
-                    <a class="menu-item " href="/search?q={{q}}&amp;type=Commits">Commits<span class="Counter ml-1 mt-1">{{result_commit_count}}</span></a>
-                    <a class="menu-item " href="/search?q={{q}}&amp;type=Users">Users<span class="Counter ml-1 mt-1">{{result_user_count}}</span></a>
+                    <a class="menu-item {% if type == '' or type == 'Models' or type == 'RankingList' %}selected{% endif %}" href="/search?q={{q}}&amp;type=Models">Models<span class="Counter ml-1 mt-1">{{result_model_count}}</span></a>
+                    <a class="menu-item {% if type == 'Modelfiles' %}selected{% endif %}" href="/search?q={{q}}&amp;type=Modelfiles">Modelfile<span class="Counter ml-1 mt-1">{{result_modelfile_count}}</span></a>
+                    <a class="menu-item {% if type == 'Commits' %}selected{% endif %}" href="/search?q={{q}}&amp;type=Commits">Commits<span class="Counter ml-1 mt-1">{{result_commit_count}}</span></a>
+                    <a class="menu-item {% if type == 'Users' %}selected{% endif %}" href="/search?q={{q}}&amp;type=Users">Users<span class="Counter ml-1 mt-1">{{result_user_count}}</span></a>
                     </nav>
                 </div>
 
@@ -25,7 +26,7 @@
                             {% elif type == 'Models' %}
                                 <h3>{{result_model_count}} model results</h3>
                             {% elif type == 'Modelfiles' %}
-                                <h3><span class="d-inline-block v-align-middle">Showing {{result_modelfile_count}} available file results</span></h3>
+                                <h3><span class="d-inline-block v-align-middle">Showing {{result_modelfile_count}} available modelfile results</span></h3>
                             {% elif type == 'Commits' %}
                                 <h3>{{result_issue_count}} commits</h3>
                             {% elif type == 'Users' %}
@@ -38,7 +39,7 @@
                             {% for model in models %}
                             <div class="repo-list-item d-flex flex-justify-start py-4 public source">
                                 <div class="col-8 pr-3">
-                                    <h3>
+                                    <h3 class="mt-0">
                                         <a class="v-align-middle" href="/models/{{model.user.username}}/{{model.model_name}}">{{model.model_name}}</a>
                                     </h3>
 
@@ -54,7 +55,7 @@
                                 </div>
 
                                 <div class="d-table-cell col-2 text-gray pt-2">
-                                    <span class="repo-language-color ml-0" style="background-color:{{model.icon_color}}"></span>
+                                    <span class="repo-language-color ml-0" style="background-color:{{model.icon_color}};"></span>
                                     {{model.model_type}}
                                 </div>
 
@@ -84,7 +85,7 @@
                                     <a href="/{{modelfile.model.user.username}}"><img class="avatar d-inline-block mr-2" src="/static/media/{{modelfile.model.user.userinfo.avatar}}" alt="@{{modelfile.model.user.username}}" width="32" height="32"></a>
 
                                     <div class="d-inline-block col-10">
-                                        <a class="text-bold" href="/models/{{modelfile.model.user.username}}/{{modelfile.model.model_name}}/">{{modelfile.model.user.username}}/{{modelfile.model.model_name}}</a>
+                                        <a class="text-bold" href="/models/{{modelfile.model.user.username}}/{{modelfile.model.model_name}}">{{modelfile.model.user.username}}/{{modelfile.model.model_name}}</a>
                                         –
                                         <a title="{{modelfile.filename}}" href="/models/{{modelfile.model.user.username}}/{{modelfile.model.model_name}}/{{modelfile.filename}}">{{modelfile.filename}}</a>
                                         <div class="mb-2">

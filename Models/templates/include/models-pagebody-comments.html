@@ -36,13 +36,13 @@
                                                 </form>
                                             </div>
                                             {% endif %}
-                                            {#{% if request.user.username != comment.user.username %}#}
+                                            {% if request.user.username != comment.user.username %}
                                             <div class="timeline-comment-actions">
                                                 <button type="button" id="{{comment.id}}" value="{{comment.user.username}}" class="timeline-comment-action btnIS-link js-comment-edit-button tooltipped tooltipped-nw new-comment-to-comment" role="menuitem" aria-label="Reply comment">
                                                     <svg class="octicon octicon-pencil" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M0 12v3h3l8-8-3-3-8 8zm3 2H1v-2h1v1h1v1zm10.3-9.3L12 6 9 3l1.3-1.3a.996.996 0 0 1 1.41 0l1.59 1.59c.39.39.39 1.02 0 1.41z"></path></svg>
                                                 </button>
                                             </div>
-                                            {#{% endif %}#}
+                                            {% endif %}
 
                                             <h3 class="timeline-comment-header-text f5 text-normal">
                                                 <strong class="css-truncate">
@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             {% empty %}
-                            <div class="blankslate blankslate-spacious blankslate-large">
+                            <div class="blankslate blankslate-spacious blankslate-large" style="margin-top:10px;">
                                 <svg height="40" class="octicon octicon-issue-opened blankslate-icon" viewBox="0 0 14 16" version="1.1" width="35" aria-hidden="true"><path fill-rule="evenodd" d="M7 2.3c3.14 0 5.7 2.56 5.7 5.7s-2.56 5.7-5.7 5.7A5.71 5.71 0 0 1 1.3 8c0-3.14 2.56-5.7 5.7-5.7zM7 1C3.14 1 0 4.14 0 8s3.14 7 7 7 7-3.14 7-7-3.14-7-7-7zm1 3H6v5h2V4zm0 6H6v2h2v-2z"></path></svg>
                                 <h3>Welcome to Comments!</h3>
                                 <p>Comments are used to share what one has learned from and track issues such as todos, bugs, feature requests, and more.</p>
@@ -92,7 +92,6 @@
                         <div class="timeline-comment">
                             <form id="new-comment-form" action="/models/{{username}}/{{model.model_name}}/comments/new" method="post">
                                 {% csrf_token %}
-
                                 <div class="js-suggester-container  js-previewable-comment-form previewable-comment-form write-selected">
                                     <div class="comment-form-head tabnav">
                                         <nav class="tabnav-tabs" role="tablist">

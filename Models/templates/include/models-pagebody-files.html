@@ -74,7 +74,7 @@
                         {% csrf_token %}
                         <input type="file" id="upload_file" name="upload_file" style="display:none" onchange="uploadFile()" />
                         <input type="button" class="btnM btnM-sm BtnGroup-item" value="Upload files" onclick="selectFile()" />
-                        <input type="hidden" id="next" name="next" value="/models/{{username}}/{{model.model_name}}" />
+                        <input type="hidden" name="next" value="/models/{{username}}/{{model.model_name}}" />
                     </form>
                 </div>
                 {% endif %}

@@ -1,5 +1,9 @@
 from django.contrib.auth.models import User
 from MachLab.models import Userinfo, Model, Modelfile, ModelResult, ModelCommit, ModelPush, ModelPull, ModelDrop, Comment, Star
+from django.core.files.base import ContentFile, File
+import os
+import zipfile
+from MachLab.public import model_type_choices, icon_colors
 
 def get_model_info(context, request, username, model_name):
     # User informtion #
@@ -41,7 +45,6 @@ def get_model_info(context, request, username, model_name):
     comment_count =  Comment.objects.filter(model=model).count()
     context['comment_count'] = comment_count
 
-
 def get_model_modelfile(username, model_name, modelfile_filename):
     user = User.objects.get(username=username)
     model = Model.objects.filter(user=user, model_name=model_name).first()
@@ -58,6 +61,34 @@ def get_model_modelfile(username, model_name, modelfile_filename):
     modelfile.lines_range = range(modelfile.lines_count)
     modelfile.size = modelfile.file.size
     return model, modelfile
+
+def download_model(request_username, username, model_name):
+    user = User.objects.get(username=username)
+    model = Model.objects.get(user=user, model_name=model_name)
+    modelfiles = Modelfile.objects.filter(model=model)
+    if modelfiles:
+        data = get_zip_data(model.model_name, modelfiles)
+        request_user = User.objects.get(username=request_username)
+        model_pull = ModelPull.objects.create(model=model, user=request_user, description='user('+request_username+') download model('+model_name+')')
+        model_pull.save()
+        return data
+
+def upload_modelfile(request_username, model_name, upload_file):
+    user = User.objects.get(username=request_username)
+    model = Model.objects.filter(user=user, model_name=model_name).first()
+    filename = upload_file.name
+    data = upload_file.file.read()
+    file = ContentFile(data)
+    modelfile = Modelfile.objects.create(model=model, filename=filename, description=filename)
+    modelfile.file.save(filename, file)
+    modelfile.save()
+    model_push = ModelPush.objects.create(push_name='upload '+filename+' file(s) into '+model_name, model=model, user=user, description='upload modelfile')
+    model_push.save()
+
+def delete_modelfile(username, model_name, modelfile_filename):
+    user = User.objects.get(username=username)
+    model = Model.objects.filter(user=user, model_name=model_name).first()
+    Modelfile.objects.filter(model=model, filename=modelfile_filename).delete()
 
 def get_comment_list(context, model):
     comments = Comment.objects.filter(model=model)
@@ -107,6 +138,9 @@ def record_delete_comment(request_username, model_name):
 
 def get_n_top(n_top=12):
     models = Model.objects.all().order_by('-click_count')[0:n_top]
+    for model in models:
+        model.icon_color = icon_colors[model.model_type]
+        model.model_type = model_type_choices[model.model_type][1]
     return models
 
 def get_zip_data(zip_name, files):

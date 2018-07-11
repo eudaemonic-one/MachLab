@@ -173,3 +173,14 @@ class MyUser(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
   
+class ClientPackage(models.Model):
+    package_name = models.CharField(max_length=32)
+    file = models.FileField(upload_to='clientpackages/')
+    description = models.TextField(max_length=256, blank=True, null=True)
+    publish_datetime = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.package_name
+
+    class Meta:
+        ordering = ['-publish_datetime']

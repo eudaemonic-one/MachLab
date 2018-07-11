@@ -1,7 +1,7 @@
 ﻿<div class="col-9 float-left">
     <div class="settings-next">
         <div class="Subhead">
-            <h2 class="Subhead-heading">模型仓库</h2>
+            <h2 class="Subhead-heading">Model Repository</h2>
         </div>
     </div>
     
@@ -30,8 +30,8 @@
         </div>
     {% empty %}
         <p class="js-collaborated-repos-empty" hidden="">
-            你现在还没有提交的模型。您是否有兴趣
-            <a href="/new">创建一个</a>?
+            You have not created any model. Do you have interest in 
+            <a href="/models/{{request.user.username}}/create">Create One</a>?
         </p>
     {% endfor %}
 </div>

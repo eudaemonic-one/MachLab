@@ -21,4 +21,4 @@ icon_colors = ['#563d7c', '#555555', '#f34b7d', '#f1e05a', '#DA5B0B', '#b07219']
 search_type_list = ['Models', 'Modelfiles', 'Commits', 'Users']
 
 # Number of models to display on culling page #
-n_top = 2
+n_top = 12

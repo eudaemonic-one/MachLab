@@ -1,8 +1,5 @@
 from django.shortcuts import render, reverse, HttpResponseRedirect
 from django.http import FileResponse, HttpResponse
-from django.core.files.base import ContentFile, File
-import os
-import zipfile
 from urllib import parse
 from django.contrib.auth.models import User
 from MachLab.models import Userinfo, Model, Modelfile, ModelResult, ModelCommit, ModelPush, ModelPull, ModelDrop, Comment, Star
@@ -35,6 +32,17 @@ def modelfile(request, username, model_name, modelfile_filename):
     get_model_info(context, request, username, model_name)
     return render(request, 'modelfile.html', context)
 
+def modelfile_delete(request, username, model_name, modelfile_filename):
+    context = {}
+    context['title'] = '模型仓库 | MachLab'
+    context['username'] = username
+    context['model_name'] = model_name
+    context['modelfile_filename'] = modelfile_filename
+    context['active'] = 'files'
+    delete_modelfile(username, model_name, modelfile_filename)
+    get_model_info(context, request, username, model_name)
+    return render(request, 'files.html', context)
+
 def comments(request, username, model_name):
     context = {}
     context['title'] = '模型评论 | MachLab'
@@ -56,10 +64,25 @@ def insights(request, username, model_name):
     get_model_info(context, request, username, model_name)
     return render(request, 'insights.html', context)
 
+def insights_display(request, username, model_name, selected_filename):
+    context = {}
+    context['title'] = '模型结果 | MachLab'
+    context['username'] = username
+    context['model_name'] = model_name
+    context['selected_filename'] = selected_filename
+    context['active'] = 'insights'
+    result_file = Modelfile.objects.filter(filename=selected_filename).first()
+    result_data = result_file.file.read()
+    context['result_file'] = result_file
+    context['result_data'] = result_data
+    context['resultAvailable'] = True
+    get_model_info(context, request, username, model_name)
+    return render(request, 'insights.html', context)
+
 class ModelSettingsForm(forms.Form):
-    model_name = forms.CharField(max_length=32)
-    model_type = forms.ChoiceField(choices=model_type_choices)
-    description = forms.CharField(max_length=256, required=False)
+    model_name = forms.CharField(max_length=32,widget=widgets.Input(attrs={'class':"form-control"}))
+    model_type = forms.ChoiceField(choices=model_type_choices,widget=widgets.Select(attrs={'class':"form-control"}))
+    description = forms.CharField(max_length=256, required=False,widget=widgets.Textarea(attrs={'class':"form-control wid-full"}))
     
     def set_initial_fields(self, model=None):
         if model:
@@ -88,8 +111,8 @@ def settings(request, username, model_name):
                 model = Model.objects.filter(model_name=model_name).first()
 
                 if model is not None:
-                    new_model = Model.objects.filter(model_name=new_model_name)
-                    if new_model is not None:
+                    new_model = Model.objects.filter(model_name=new_model_name).first()
+                    if model != new_model:
                         context['alreadyExisted'] = True
                     else:
                         model.model_name = new_model_name
@@ -113,50 +136,31 @@ def settings(request, username, model_name):
     else:
         return HttpResponseRedirect('/')
 
-def upload_modelfile(request, username, model_name):
+def modelfile_upload(request, username, model_name):
     context = {}
     context['title'] = '上传 | MachLab'
     context['username'] = username
     context['model_name'] = model_name
     redirect_to = request.POST.get('next', request.GET.get('next',''))
     upload_file = request.FILES.get('upload_file')
+    upload_modelfile(request.user.username, model_name, upload_file)
+    get_model_info(context, request, username, model_name)
+    return render(request, 'files.html', context)
 
-    model = Model.objects.get(model_name=model_name)
-    user = User.objects.get(username=username)
-    
-    filename = upload_file.name
-    modelfile = Modelfile.objects.create(model=model, filename=filename, description=filename)
-    data = upload_file.file.read()
-    file = ContentFile(data)
-    modelfile.file.save(filename, file)
-    modelfile.save()
-
-    model_push = ModelPush.objects.create(push_name='upload '+len(upload_file)+' file(s) into '+model_name, model=model, user=user, description='upload modelfile')
-    model_push.save()
-
-    return models(request, username, model_name)
-
-def download_model(request, username, model_name):
+def model_download(request, username, model_name):
     context = {}
     context['title'] = '下载 | MachLab'
     context['username'] = username
     context['model_name'] = model_name
     redirect_to = request.POST.get('next', request.GET.get('next',''))
-    
-    model = Model.objects.get(model_name=model_name)
-    user = User.objects.get(username=request.user.username)
-    modelfiles = Modelfile.objects.filter(model=model)
-    data = get_zip_data(model.model_name, modelfiles)
+    data = download_model(request.user.username, username, model_name)
+    if data:
+        response = HttpResponse(data, content_type='application/zip')  
+        response['Content-Type'] = 'application/octet-stream'  
+        response['Content-Disposition'] = 'attachment;filename=' + parse.quote(model_name)
+        return response
 
-    model_pull = ModelPull.objects.create(model=model, user=user, description='user('+request.user.username+') download model('+model_name+')')
-    model_pull.save()
-
-    response = HttpResponse(data, content_type='application/zip')  
-    response['Content-Type'] = 'application/octet-stream'  
-    response['Content-Disposition'] = 'attachment;filename=' + parse.quote(zip_name)
-    return response
-
-def create_model(request, username):
+def model_create(request, username):
     context = {}
     context['title'] = '创建模型 | MachLab'
     context['username'] = username
@@ -192,7 +196,7 @@ def create_model(request, username):
     else:
         return HttpResponseRedirect('/')
 
-def drop_model(request, username, model_name):
+def model_delete(request, username, model_name):
     context = {}
     context['title'] = '删除模型 | MachLab'
     context['username'] = username
@@ -222,7 +226,7 @@ def unstar(request, username, model_name):
     record_unstar(request, model_name)
     return HttpResponseRedirect(redirect_to)
 
-def new_comment(request, username, model_name):
+def comment_new(request, username, model_name):
     context = {}
     context['title'] = '新建评论 | MachLab'
     context['username'] = username
@@ -235,7 +239,7 @@ def new_comment(request, username, model_name):
     get_comment_list(context, model)
     return render(request, 'comments.html', context)
 
-def delete_comment(request, username, model_name):
+def comment_delete(request, username, model_name):
     context = {}
     context['title'] = '删除评论 | MachLab'
     context['username'] = username
