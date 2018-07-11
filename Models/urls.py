@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'(.*?)/(.*?)/comments$', models_view.comments),
     
     # Model Ranking List #
-    url(r'^culling$', models_view.culling, name='culling'),
+    url(r'^ranking-list', models_view.ranking_list, name='ranking-list'),
 
 ]
 

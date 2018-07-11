@@ -13,7 +13,7 @@
                 <span class="separator">/</span>
 
                 <span class="js-path-segment">
-                    <a data-pjax="true" href="/{{username}}/{{model_name}}">
+                    <a data-pjax="true" href="/models/{{username}}/{{model_name}}">
                         <span>{{model_name}}</span>
                     </a>
                 </span>
@@ -27,9 +27,9 @@
         <div class="file">
             <div class="file-header">
                 <div class="file-info">
-                    {{modelfile.lines_count}} lines
+                    {{modelfile.lines_count}} lines ({{modelfile.sloc_count}} slocs)
                     <span class="file-info-divider"></span>
-                    {{modelfile.size}} B
+                    {{modelfile.size | filesizeformat}}
                 </div>
             </div>
             <br />

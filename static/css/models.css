@@ -169,6 +169,17 @@ button, html [type="button"], [type="reset"], [type="submit"] {
     display: flex !important;
 }
 
+.file-wrap {
+    margin-bottom: 10px;
+    border: 1px solid #dfe2e5;
+    border-top-color: rgb(223, 226, 229);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+}
+
 table.files {
     width: 100%;
     background: #fff;
@@ -616,6 +627,10 @@ svg:not(:root) {
     float: right;
     margin: 0;
     list-style: none;
+}
+
+.pagehead ul.pagehead-actions li {
+    display: inline-block;
 }
 
 .social-count {

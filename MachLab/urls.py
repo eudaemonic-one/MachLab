@@ -3,6 +3,7 @@ Definition of urls for MachLab.
 """
 
 from MachLab import view, settings
+from Account import views as account_view
 from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.contrib import admin
@@ -26,10 +27,10 @@ urlpatterns = [
     url(r'^account/', include('Account.urls')),
     
     # Download Pages #
-    url(r'^download/$', view.download, name='download'),
+    url(r'^download/', view.download, name='download'),
     
     # User Profile Pages #
-    url(r'^(.*?)/', include('UserProfile.urls')),
+    url(r'^(.*?)/$', account_view.user_profile, name='user-profile'),
     
     # Website Pages #
     url(r'^$', view.index, name='index'),

@@ -20,6 +20,7 @@ class Model(models.Model):
     model_type = models.IntegerField(choices=model_type_choices, default=(0, 'default'), blank=True)
     description = models.TextField(max_length=256, blank=True, null=True)
     star_count = models.IntegerField(default=0)
+    click_count = models.IntegerField(default=0)
     modified_datetime = models.DateTimeField(auto_now=True)
  
     class Meta:

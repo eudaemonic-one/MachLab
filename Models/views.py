@@ -1,55 +1,16 @@
-from django import forms
-from django.forms import widgets
 from django.shortcuts import render, reverse, HttpResponseRedirect
-from django.contrib.auth.models import User
-from django.core.files.base import ContentFile, File
 from django.http import FileResponse, HttpResponse
+from django.core.files.base import ContentFile, File
 import os
 import zipfile
 from urllib import parse
+from django.contrib.auth.models import User
 from MachLab.models import Userinfo, Model, Modelfile, ModelResult, ModelCommit, ModelPush, ModelPull, ModelDrop, Comment, Star
+from django import forms
+from django.forms import widgets
 from MachLab.settings import BASE_DIR
-from MachLab.public import model_type_choices
-
-def get_model_info(context, request, username, model_name):
-    # User informtion #
-    user = User.objects.get(username=username)
-    context['email'] = user.email
-    if user.userinfo:
-        context['bio'] = user.userinfo.bio
-        context['url'] = user.userinfo.url
-        context['location'] = user.userinfo.location
-        context['avatar'] = user.userinfo.avatar
-        
-    # Model information #
-    model = Model.objects.filter(user=user, model_name=model_name).first()
-    context['model'] = model
-
-    # Star information #
-    star = Star.objects.filter(model=model, user=request.user).first()
-    if star is not None:
-        context['star_type'] = 'unstar'
-    else:
-        context['star_type'] = 'star'
-
-    # Modelfiles information #
-    modelfiles = Modelfile.objects.filter(model=model)
-    context['modelfiles'] = modelfiles
-
-    # Latest Commit Information #
-    commits = ModelCommit.objects.filter(user=user, model=model)
-    latestCommit = commits.order_by('commit_datetime').last()
-    context['latestCommit'] = latestCommit
-
-    # Count #
-    commit_count = commits.count()
-    context['commit_count'] = commit_count
-    upload_count = ModelPush.objects.filter(user=user, model=model).count()
-    context['upload_count'] = upload_count
-    download_count = ModelPull.objects.filter(user=user, model=model).count()
-    context['download_count'] = download_count
-    comment_count =  Comment.objects.filter(model=model).count()
-    context['comment_count'] = comment_count
+from MachLab.public import *
+from MachLab.record import *
 
 def models(request, username, model_name):
     context = {}
@@ -57,6 +18,7 @@ def models(request, username, model_name):
     context['username'] = username
     context['model_name'] = model_name
     context['active'] = 'files'
+    record_click(model_name)
     get_model_info(context, request, username, model_name)
     return render(request, 'files.html', context)
 
@@ -67,31 +29,11 @@ def modelfile(request, username, model_name, modelfile_filename):
     context['model_name'] = model_name
     context['modelfile_filename'] = modelfile_filename
     context['active'] = 'files'
-    user = User.objects.get(username=username)
-    model = Model.objects.filter(user=user, model_name=model_name).first()
+    model, modelfile = get_model_modelfile(username, model_name, modelfile_filename)
     context['model'] = model
-    modelfile = Modelfile.objects.filter(model=model, filename=modelfile_filename).first()
-    lines = modelfile.file.readlines()
-    modelfile.lines_count = len(lines)
-    for i in range(modelfile.lines_count):
-        line_text = str(lines[i], encoding = "utf-8")
-        line_text = line_text.replace(' ', ' ')
-        lines[i] = line_text
-    modelfile.text = lines
-    modelfile.lines_range = range(modelfile.lines_count)
-    modelfile.size = modelfile.file.size
     context['modelfile'] = modelfile
     get_model_info(context, request, username, model_name)
     return render(request, 'modelfile.html', context)
-
-def get_comment_list(context, model):
-    comments = Comment.objects.filter(model=model)
-    for comment in comments:
-        comment.user.username = comment.user.username
-        comment.user.avatar = comment.user.userinfo.avatar
-        if comment.target is not None:
-            comment.target.username = comment.target.user.username
-    context['comments'] = comments
 
 def comments(request, username, model_name):
     context = {}
@@ -204,25 +146,7 @@ def download_model(request, username, model_name):
     model = Model.objects.get(model_name=model_name)
     user = User.objects.get(username=request.user.username)
     modelfiles = Modelfile.objects.filter(model=model)
-
-    zip_name = model_name+'.zip'
-    zip_file = zipfile.ZipFile(zip_name, 'w')
-    for modelfile in modelfiles:
-        f = open(modelfile.filename, "wt")
-        ff = modelfile.file
-        ff.open(mode='rt')
-        data = ff.read()
-        ff.close()
-        f.write(data)
-        f.close()
-        zip_file.write(modelfile.filename)
-    zip_file.close()
-    zip_file = open(zip_name, 'rb')
-    data = zip_file.read()
-    zip_file.close()
-    
-    for modelfile in modelfiles:
-        os.remove(modelfile.filename)
+    data = get_zip_data(model.model_name, modelfiles)
 
     model_pull = ModelPull.objects.create(model=model, user=user, description='user('+request.user.username+') download model('+model_name+')')
     model_pull.save()
@@ -278,48 +202,6 @@ def drop_model(request, username, model_name):
     model = Model.objects.filter(user=user, model_name=model_name).delete()
     return HttpResponseRedirect(redirect_to)
 
-def new_comment(request, username, model_name):
-    context = {}
-    context['title'] = '新建评论 | MachLab'
-    context['username'] = username
-    context['model_name'] = model_name
-    context['active'] = 'comments'
-
-    model = Model.objects.get(model_name=model_name)
-    user = User.objects.get(username=request.user.username)
-    target_id = request.POST.get('new-comment-target-id')
-    comments = Comment.objects.filter(model=model)
-    target = None
-    for comment in comments:
-        if str(comment.id) == target_id:
-            target = comment
-            break
-    
-    content = request.POST.get('comment-body')
-    comment = Comment.objects.create(model=model, user=user, target=target, content=content)
-    comment.save()
-
-    get_model_info(context, request, username, model_name)
-    get_comment_list(context, model)
-    return render(request, 'comments.html', context)
-
-
-def delete_comment(request, username, model_name):
-    context = {}
-    context['title'] = '删除评论 | MachLab'
-    context['username'] = username
-    context['model_name'] = model_name
-    context['active'] = 'comments'
-
-    comment_id = request.POST.get('comment-to-delete-id')
-    comment_to_delete = Comment.objects.get(id=int(comment_id))
-    comment_to_delete.delete()
-    model = Model.objects.get(model_name=model_name)
-    
-    get_model_info(context, request, username, model_name)
-    get_comment_list(context, model)
-    return render(request, 'comments.html', context)
-
 def star(request, username, model_name):
     context = {}
     context['title'] = '点赞 | MachLab'
@@ -327,14 +209,7 @@ def star(request, username, model_name):
     context['model_name'] = model_name
     context['active'] = 'files'
     redirect_to = request.POST.get('next', request.GET.get('next',''))
-
-    model = Model.objects.filter(model_name=model_name).first()
-    user = User.objects.get(username=request.user.username)
-    star = Star.objects.create(model=model, user=user)
-    star.save()
-    model.star_count += 1
-    model.save()
-
+    record_star(request, model_name)
     return HttpResponseRedirect(redirect_to)
 
 def unstar(request, username, model_name):
@@ -344,17 +219,41 @@ def unstar(request, username, model_name):
     context['model_name'] = model_name
     context['active'] = 'files'
     redirect_to = request.POST.get('next', request.GET.get('next',''))
-
-    model = Model.objects.filter(model_name=model_name).first()
-    user = User.objects.get(username=request.user.username)
-    Star.objects.filter(model=model, user=user).delete()
-    if model.star_count >= 1:
-        model.star_count -= 1
-        model.save()
-
+    record_unstar(request, model_name)
     return HttpResponseRedirect(redirect_to)
 
-def culling(request):
+def new_comment(request, username, model_name):
+    context = {}
+    context['title'] = '新建评论 | MachLab'
+    context['username'] = username
+    context['model_name'] = model_name
+    context['active'] = 'comments'
+    target_id = request.POST.get('new-comment-target-id')
+    content = request.POST.get('comment-body')
+    record_new_comment(request.user.username, model_name, target_id, content)
+    get_model_info(context, request, username, model_name)
+    get_comment_list(context, model)
+    return render(request, 'comments.html', context)
+
+def delete_comment(request, username, model_name):
+    context = {}
+    context['title'] = '删除评论 | MachLab'
+    context['username'] = username
+    context['model_name'] = model_name
+    context['active'] = 'comments'
+    model = Model.objects.get(model_name=model_name)
+    comment_id = request.POST.get('comment-to-delete-id')
+    record_delete_comment(comment_id)
+    get_model_info(context, request, username, model_name)
+    get_comment_list(context, model)
+    return render(request, 'comments.html', context)
+
+def ranking_list(request):
     context = {}
     context['title'] = '模型精选 | MachLab'
-    return render(request, 'index.html', context)
+    context['q'] = 'RankingList'
+    context['type'] = 'RankingList'
+    context['n_top'] = n_top
+    models = get_n_top(n_top)
+    context['models'] = models
+    return render(request, 'search.html', context)

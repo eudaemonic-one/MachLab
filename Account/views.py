@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from datetime import datetime
 from MachLab.models import Userinfo, Model, Modelfile
 from MachLab.settings import BASE_DIR
+from MachLab.public import model_type_choices, icon_colors
 
 # Login & Register & Logout #
 
@@ -93,7 +94,6 @@ def register(request):
 class LostPasswordForm(forms.Form):
     email = forms.EmailField(max_length=32, widget=widgets.EmailInput(attrs={'type':"email",'class':"form-control",'id':"exampleInputEmail"}))
     
-#@csrf_exempt
 def lost_password(request):
     context = {}
     context['title'] = '找回密码 | MachLab'
@@ -234,3 +234,29 @@ def account_applications(request):
     apps = [{'name':'machlab', 'size':22},]
     context['apps'] = apps
     return render(request, 'applications.html', context)
+
+# User Profile #
+
+def user_profile(request, username=None):
+    context = {}
+    context['title'] = '用户概览 | MachLab'
+    context['username'] = username
+    tag = request.GET.get('tag')
+    context['tag'] = tag
+
+    # User informtion #
+    user = User.objects.get(username=username)
+    context['email'] = user.email
+    if user.userinfo:
+        context['bio'] = user.userinfo.bio
+        context['url'] = user.userinfo.url
+        context['location'] = user.userinfo.location
+        context['avatar'] = user.userinfo.avatar
+
+    # Models information #
+    models = Model.objects.filter(user=user)
+    for model in models:
+        model.icon_color = icon_colors[model.model_type]
+        model.model_type = model_type_choices[model.model_type][1]
+    context['models'] = models
+    return render(request, 'user-profile.html', context)
