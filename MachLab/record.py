@@ -99,38 +99,44 @@ def get_comment_list(context, model):
             comment.target.username = comment.target.user.username
     context['comments'] = comments
 
-def record_click(model_name):
-    model = Model.objects.filter(model_name=model_name).first()
-    model.click_count += 1
-    model.save()
+def record_click(request, username, model_name):
+    if request.user.is_authenticated:
+        user = User.objects.get(username=username)
+        model = Model.objects.filter(user=user, model_name=model_name).first()
+        model.click_count += 1
+        model.save()
 
-def record_star(request, model_name):
-    model = Model.objects.filter(model_name=model_name).first()
+def record_star(request, username, model_name):
+    user = User.objects.get(username=username)
+    model = Model.objects.filter(user=user, model_name=model_name).first()
     user = User.objects.get(username=request.user.username)
     star = Star.objects.create(model=model, user=user)
     star.save()
     model.star_count += 1
     model.save()
 
-def record_unstar(request, model_name):
-    model = Model.objects.filter(model_name=model_name).first()
+def record_unstar(request, username, model_name):
+    user = User.objects.get(username=username)
+    model = Model.objects.filter(user=user, model_name=model_name).first()
     user = User.objects.get(username=request.user.username)
     Star.objects.filter(model=model, user=user).delete()
     if model.star_count >= 1:
         model.star_count -= 1
         model.save()
 
-def record_new_comment(request_username, model_name, target_id, content):
-    model = Model.objects.get(model_name=model_name)
-    user = User.objects.get(username=request_username)
+def record_new_comment(request_username, username, model_name, target_id, content):
+    user = User.objects.get(username=username)
+    model = Model.objects.get(user=user, model_name=model_name)
+    request_user = User.objects.get(username=request_username)
     comments = Comment.objects.filter(model=model)
     target = None
     for comment in comments:
         if str(comment.id) == target_id:
             target = comment
             break
-    comment = Comment.objects.create(model=model, user=user, target=target, content=content)
+    comment = Comment.objects.create(model=model, user=request_user, target=target, content=content)
     comment.save()
+    return model
 
 def record_delete_comment(request_username, model_name):
     comment_to_delete = Comment.objects.get(id=int(comment_id))

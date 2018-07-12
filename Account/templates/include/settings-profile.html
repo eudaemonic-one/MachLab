@@ -7,6 +7,8 @@
                 </div>
                 {% if updateInvalid %}
                 <div class="flash flash-full ">Update user profile failed！</div>
+                {% elif alreadyRegistered %}
+                <div class="flash flash-full ">Username or email has already been registered！</div>
                 {% endif %}
             </div>
             

@@ -38,7 +38,7 @@ class UserAdmin(BaseUserAdmin):
     #        'fields': ('email', 'username', 'password', 'location')}
     #    ),
     #)
-    inlines = (UserinfoInline, ModelInline, )
+    inlines = (UserinfoInline, )
     search_fields = ('email','username')
     ordering = ('email','username')
     filter_horizontal = ()

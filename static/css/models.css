@@ -923,6 +923,9 @@ h1 {
     background-color: #fafbfc;
 }
 
+#comment-body {
+    width: 100%;
+}
 
 .po-re {
     position: relative;

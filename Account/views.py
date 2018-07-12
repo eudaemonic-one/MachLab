@@ -114,11 +114,11 @@ def logout(request):
 # Account Settings #
 
 class ProfileForm(forms.Form):
-    username = forms.CharField(max_length=16, widget=widgets.Input(attrs={'type':"username",'class':"form-control",'id':"exampleInputUsername"}))
+    username = forms.CharField(max_length=16, widget=widgets.Input(attrs={'type':"username",'class':"form-control",'id':"exampleInputUsername",'readonly':True}))
     email = forms.EmailField(max_length=32, widget=widgets.EmailInput(attrs={'type':"email",'class':"form-control",'id':"exampleInputEmail"}))
-    bio = forms.CharField(max_length=256, widget=widgets.Textarea(attrs={'class':"form-control"}))
-    url = forms.URLField(max_length=256, widget=widgets.URLInput(attrs={'class':"form-control"}))
-    location = forms.CharField(max_length=32, widget=widgets.Input(attrs={'class':"form-control"}))
+    bio = forms.CharField(max_length=256, widget=widgets.Textarea(attrs={'class':"form-control"}), required=False)
+    url = forms.URLField(max_length=256, widget=widgets.URLInput(attrs={'class':"form-control"}), required=False)
+    location = forms.CharField(max_length=32, widget=widgets.Input(attrs={'class':"form-control"}), required=False)
     avatar = forms.ImageField(allow_empty_file=True)
 
     def set_initial_fields(self, user=None):
@@ -155,10 +155,15 @@ def account_profile(request):
             location = cd['location']
             try:
                 user = User.objects.get(username=request.user.username)
-                if username:
-                    user.username = username
-                if email:
-                    user.email = email
+                if request.user.username != username or request.user.email != email:
+                    if username and email:
+                        already_username = User.objects.get(username=username)
+                        already_email = User.objects.filter(email=email).first()
+                        if already_username or already_emails:
+                            context['alreadyRegistered'] = True
+                            return render(request, 'account-settings.html', context)
+                        else:
+                            user.email = email
                 if user.userinfo:
                     if bio:
                         user.userinfo.bio = bio
@@ -168,6 +173,7 @@ def account_profile(request):
                         user.userinfo.location = location
                     if avatar:
                         user.userinfo.avatar = avatar
+                user.userinfo.save()
                 user.save()
             except Exception as e:
                 context['updateInvalid'] = True

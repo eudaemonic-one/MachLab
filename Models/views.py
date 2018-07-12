@@ -15,7 +15,7 @@ def models(request, username, model_name):
     context['username'] = username
     context['model_name'] = model_name
     context['active'] = 'files'
-    record_click(model_name)
+    record_click(request, username, model_name)
     get_model_info(context, request, username, model_name)
     return render(request, 'files.html', context)
 
@@ -213,7 +213,7 @@ def star(request, username, model_name):
     context['model_name'] = model_name
     context['active'] = 'files'
     redirect_to = request.POST.get('next', request.GET.get('next',''))
-    record_star(request, model_name)
+    record_star(request, username, model_name)
     return HttpResponseRedirect(redirect_to)
 
 def unstar(request, username, model_name):
@@ -223,7 +223,7 @@ def unstar(request, username, model_name):
     context['model_name'] = model_name
     context['active'] = 'files'
     redirect_to = request.POST.get('next', request.GET.get('next',''))
-    record_unstar(request, model_name)
+    record_unstar(request, username, model_name)
     return HttpResponseRedirect(redirect_to)
 
 def comment_new(request, username, model_name):
@@ -234,7 +234,7 @@ def comment_new(request, username, model_name):
     context['active'] = 'comments'
     target_id = request.POST.get('new-comment-target-id')
     content = request.POST.get('comment-body')
-    record_new_comment(request.user.username, model_name, target_id, content)
+    model = record_new_comment(request.user.username, username, model_name, target_id, content)
     get_model_info(context, request, username, model_name)
     get_comment_list(context, model)
     return render(request, 'comments.html', context)
