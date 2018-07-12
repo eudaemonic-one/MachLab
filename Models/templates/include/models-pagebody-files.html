@@ -74,7 +74,7 @@
                         {% csrf_token %}
                         <input type="file" id="upload_file" name="upload_file" style="display:none" onchange="uploadFile()" />
                         <input type="button" class="btnM btnM-sm BtnGroup-item" value="Upload files" onclick="selectFile()" />
-                        <input type="hidden" id="next" name="next" value="/models/{{username}}/{{model.model_name}}" />
+                        <input type="hidden" name="next" value="/models/{{username}}/{{model.model_name}}" />
                     </form>
                 </div>
                 {% endif %}
@@ -104,14 +104,14 @@
         <div class="commit-tease js-details-container Details d-flex">
             <div class="AvatarStack flex-self-start ">
                 <div class="AvatarStack-body" aria-label="{{username}}">
-                    <a class="avatar" href="/{{username}}">
+                    <a class="avatar" href="/{{username}}/">
                         <img alt="@{{username}}" src="/static/media/{{avatar}}" width="20" height="20">
                     </a>  
                 </div>
             </div>
 
             <div class="flex-auto f6 no-wrap mr-3">
-                <a href="" class="commit-author tooltipped tooltipped-s user-mention" aria-label="View all commits by {{username}}">{{username}}</a>
+                <a href="/{{username}}/" class="commit-author tooltipped tooltipped-s user-mention" aria-label="View all commits by {{username}}">{{username}}</a>
                 <span data-pjax="true" title="{{latestCommit.description}}" class="message" href="">{{latestCommit.description}}</span>
             </div>
             <div class="no-wrap">

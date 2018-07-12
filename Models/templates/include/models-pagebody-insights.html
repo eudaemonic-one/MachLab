@@ -1,1 +1,127 @@
-﻿
+﻿<div class="container new-discussion-timeline experiment-repo-nav  ">
+    <div class="repository-content ">
+        <div class="columns">
+            <div class="Subhead">
+                <h2 class="Subhead-heading">Model Result Display</h2>
+                <div class="Subhead-actions">
+                    <form>
+                        <details class="details-reset details-overlay select-menu position-relative">
+                            <summary class="btn select-menu-button" aria-haspopup="true">
+                                <i>Result Filename:</i>
+                                <span data-menu-button="">{{selected_filename}}</span>
+                            </summary>
+
+                            <details-menu class="select-menu-modal position-absolute right-0" style="z-index: 99" role="menu">
+                                <div class="select-menu-header">
+                                    <span class="select-menu-title">Filter result file</span>
+                                </div>
+                                <div class="select-menu-list">
+                                    {% for modelfile in modelfiles %}
+                                    <a class="select-menu-item {% if selected_filename == modelfile.filename %}selected{% endif %}" role="menuitem" aria-checked="false" href="/models/{{username}}/{{model.model_name}}/insights/{{modelfile.filename}}" data-pjax="#js-repo-pjax-container">
+                                        <svg class="octicon octicon-check select-menu-item-icon" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"></path></svg>
+                                        <div class="select-menu-item-text" data-menu-button-text="">{{modelfile.filename}}</div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </details-menu>
+                        </details>
+                    </form>
+                </div>
+            </div>
+
+            <div class="Box">
+                <div class="Box-header">
+                    <h3 class="Box-title">Overview</h3>
+                </div>
+
+                <ul>
+                    <li class="Box-row p-0 d-flex">
+                        <div class="flex-item-equal p-4">
+                            <div class="d-table width-full bg-gray"></div>
+                            <div class="mt-2">
+                                <span class="text-emphasized">Result Description:</span>
+                                <div id="result-description"></div>
+                            </div>
+                        </div>
+
+                        <div class="flex-item-equal p-4">
+                            <div class="d-table width-full bg-gray"></div>
+                            <div class="mt-2">
+                                <span id="data-items-count" class="text-emphasized">0</span>
+                                Data Items
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            {% if selected_filename %}
+            <div class="Box" style="margin-top:20px;">
+                <div id="echarts-placeholder" style="width:inherit;height:300px;">
+                </div>
+            </div>
+            
+            <script type="text/javascript">
+                var jsonData = {{ result_data | safe }}
+                var title = jsonData.title
+                var description = jsonData.description
+                var seriesName = jsonData.series_name
+                var xAxisName = jsonData.x_axis_name
+                var xAxisRangeStart = jsonData.x_axis_range_start
+                var xAxisRangeEnd = jsonData.x_axis_range_end
+                var xAxisRange = new Array(xAxisRangeEnd - xAxisRangeStart)
+                var yAxisName = jsonData.y_axis_name
+                var yAxisRangeStart = jsonData.y_axis_range_start
+                var yAxisRangeEnd = jsonData.y_axis_range_end
+                var yAxisRange = new Array(yAxisRangeEnd - yAxisRangeStart)
+                var trueData = jsonData.true_data
+                var predictData = jsonData.predict_data
+                var dataItemsCount = xAxisRangeEnd - xAxisRangeStart
+                for (var i = 0; i < xAxisRange.length; i++) {
+                    xAxisRange[i] = i;
+                    yAxisRange[i] = i;
+                }
+
+                var myChart = echarts.init(document.getElementById('echarts-placeholder'));
+
+                var option = {
+                    title: {
+                        text: title,
+                        left: 'center'
+                    },
+                    tooltip: {
+                    },
+                    legend: {
+                        data: [seriesName]
+                    },
+                    xAxis: {
+                        data: xAxisRange
+                    },
+                    yAxis: {
+                        type: 'value'
+                    },
+                    series: [
+                        {
+                            name: 'true_data',
+                            type: 'line',
+                            data: trueData
+                        },
+                        {
+                            name: 'predict_data',
+                            type: 'line',
+                            data: predictData
+                        }
+                    ]
+                };
+
+                myChart.setOption(option);
+                $('#result-description').text(description)
+                $('#data-items-count').text(dataItemsCount)
+            </script>
+            {% else %}
+            <div class="blankslate mt-4">
+                <h4>This isn't a available result display for {{model.model_name}}.</h4>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

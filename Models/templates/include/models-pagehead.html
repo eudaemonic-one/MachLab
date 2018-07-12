@@ -1,4 +1,10 @@
-﻿<div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav  ">
+﻿<script>
+    $(document).ready(function () {
+        document.getElementById('next').value = window.location.href;
+    })
+</script>
+
+<div class="pagehead repohead instapaper_ignore readability-menu experiment-repo-nav  ">
     <div class="repohead-details-container clearfix container">
         <h1 class="public ">
             <svg class="octicon octicon-repo" viewBox="0 0 12 16" version="1.1" width="12" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M4 9H3V8h1v1zm0-3H3v1h1V6zm0-2H3v1h1V4zm0-2H3v1h1V2zm8-1v12c0 .55-.45 1-1 1H6v2l-1.5-1.5L3 16v-2H1c-.55 0-1-.45-1-1V1c0-.55.45-1 1-1h10c.55 0 1 .45 1 1zm-1 10H1v2h2v-1h3v1h5v-2zm0-10H2v9h9V1z"></path></svg>
@@ -8,29 +14,38 @@
         </h1>
 
         <ul class="pagehead-actions">
+            <li style="display：inline-block;">
+                <form data-autosubmit="true" data-remote="true" class="js-social-container" action="" accept-charset="UTF-8" method="post">
+                    {% csrf_token %}
+                    <a href="" class="btnIS btnIS-sm btnIS-with-count select-menu-button js-menu-target" role="button" aria-haspopup="true" aria-expanded="true">
+                        <span class="js-select-button">
+                            <svg class="octicon octicon-eye" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M8.06 2C3 2 0 8 0 8s3 6 8.06 6C13 14 16 8 16 8s-3-6-7.94-6zM8 12c-2.2 0-4-1.78-4-4 0-2.2 1.8-4 4-4 2.22 0 4 1.8 4 4 0 2.22-1.78 4-4 4zm2-4c0 1.11-.89 2-2 2-1.11 0-2-.89-2-2 0-1.11.89-2 2-2 1.11 0 2 .89 2 2z"></path></svg>
+                            Watch
+                        </span>
+                    </a>
+                    <a class="social-count js-social-count" href="" aria-label="{{model.click_count}} users are watching this model">
+                    {{model.click_count}}
+                    </a>
+                </form>
+            </li>
             <li>
                 <div class="js-toggler-container js-social-container starring-container on">
-                    <script>
-                        $(document).ready(function () {
-                            document.getElementById('next').value = window.location.href;
-                        })
-                    </script>
                     <form class="starred js-social-form" action="/models/{{username}}/{{model.model_name}}/{{star_type}}" accept-charset="UTF-8" method="post">
                         {% csrf_token %}
                         <input name="star_type" value="{{star_type}}" type="hidden" />
                         <input id="next" name="next" value="window.location.href" type="hidden" />
                         {% if star_type == 'unstar' %}
-                        <button type="submit" class="btnIS btnIS-sm btnIS-with-count js-toggler-target" aria-label="Unstar this repository" title="Unstar RichardBrook24/MachLab" data-ga-click="Repository, click unstar button, action:files#disambiguate; text:Unstar">
+                        <button type="submit" class="btnIS btnIS-sm btnIS-with-count js-toggler-target" aria-label="Unstar this model" title="Unstar">
                             <svg class="octicon octicon-star" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"></path></svg>
                             Unstar
                         </button>
                         {% elif star_type == 'star' %}
-                        <button type="submit" class="btnIS btnIS-sm btnIS-with-count js-toggler-target" aria-label="Star this repository" title="Star RichardBrook24/2018-MCM-ICM-Problem-C" data-ga-click="Repository, click star button, action:files#disambiguate; text:Star">
+                        <button type="submit" class="btnIS btnIS-sm btnIS-with-count js-toggler-target" aria-label="Star this model" title="Star">
                             <svg class="octicon octicon-star" viewBox="0 0 14 16" version="1.1" width="14" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M14 6l-4.9-.64L7 1 4.9 5.36 0 6l3.6 3.26L2.67 14 7 11.67 11.33 14l-.93-4.74L14 6z"></path></svg>
                             Star
                         </button>
                         {% endif %}
-                        <a class="social-count js-social-count" href="" aria-label="{{model.star_count}} users starred this repository">
+                        <a class="social-count js-social-count" href="" aria-label="{{model.star_count}} users starred this model">
                         {{model.star_count}}
                         </a>
                     </form>

@@ -133,6 +133,7 @@ div {
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #e1e4e8;
+    margin-bottom: -20px;
 }
 
 .UnderlineNav-item {
@@ -167,6 +168,18 @@ div {
 
 .float-left {
     float: left !important;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
 }
 
 .col-9 {

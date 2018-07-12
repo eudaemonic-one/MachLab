@@ -13,12 +13,12 @@
         <div class="col-md-4 column">
             <img height="140" width="140" src="/static/img/logo.png" class="img-responsive center-block" />
             <h3 class="text-center">
-                登录您的账号
+                Login
             </h3>
             {% if loginInvalid %}
             <div class="flash flash-error">
                 <div class="text-center">
-                    登录失败！
+                    Login failed！
                 </div>
             </div>
             {% endif %}
@@ -39,11 +39,11 @@
                     </div>
 
                     <div class="login-form-action">
-                        <button type="submit" class="btn btn-primary btn-block">登录</button>
+                        <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </div>
 
                     <div class="login-links mt-3">
-                        <a href="{% url 'index'%}" rel="external" class="logged-out-form-back-link">←返回 MachLab 首页</a>
+                        <a href="{% url 'index'%}" rel="external" class="logged-out-form-back-link">←Return to MachLab</a>
                     </div>
 
                     <div class="login-form-next">
@@ -51,7 +51,7 @@
                     </div>
                 </form>
             </div>
-            <p class="create-account-callout mt-3">如尚未注册，请尝试<a href="{% url 'register'%}">MachLab</a>！</p>
+            <p class="create-account-callout mt-3">If you havn't registered to us yet, please try <a href="{% url 'register'%}">MachLab</a>！</p>
         </div>
         <div class="col-md-4 column">
         </div>

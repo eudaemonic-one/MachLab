@@ -3,10 +3,12 @@
         <div class="profile">
             <div class="profile-form-header-wrapper">
                 <div class="Subhead mt-0 mb-0">
-                    <h2 class="Subhead-heading">个人信息概览</h2>
+                    <h2 class="Subhead-heading">User Profile</h2>
                 </div>
                 {% if updateInvalid %}
-                <div class="flash flash-full ">更改用户信息失败！</div>
+                <div class="flash flash-full ">Update user profile failed！</div>
+                {% elif alreadyRegistered %}
+                <div class="flash flash-full ">Username or email has already been registered！</div>
                 {% endif %}
             </div>
             
@@ -18,19 +20,19 @@
                         {% csrf_token %}
                         <div class="form-group">
                             <div class="field profile-form-username">
-                                <label for="id_username">用户名</label>
+                                <label for="id_username">Username</label>
                                 {{ form.username }}
                                 {{ form.username.errors }}
                             </div>
 
                             <div class="field profile-form-email">
-                                <label for="id_email">电子邮件地址</label>
+                                <label for="id_email">Email</label>
                                 {{ form.email }}
                                 {{ form.email.errors }}
                             </div>
 
                             <div class="field profile-form-bio">
-                                <label for="id_bio">个人简介</label>
+                                <label for="id_bio">Self-Bio</label>
                                 {{ form.bio }}
                                 {{ form.bio.errors }}
                             </div>
@@ -42,13 +44,13 @@
                             </div>
 
                             <div class="field profile-form-location mb-2 ">
-                                <label for="id_location">位置</label>
+                                <label for="id_location">Location</label>
                                 {{ form.location }}
                                 {{ form.location.errors }}
                             </div>
 
                             <div class="profile-form-action"><br />
-                                <button type="submit" class="btn btn-primary">提交更改</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
 
                             <div class="profile-form-next">
@@ -57,7 +59,7 @@
                         </div>
                     </div>
                     <div class="col-md-3 column">
-                    <label for="upload-profile-picture" class="mb-2">头像</label>
+                    <label for="upload-profile-picture" class="mb-2">Avatar</label>
                         <div class="field profile-form-avatar">
                             <img class="avatar rounded-2 mb-2" src="/static/media/{{request.user.userinfo.avatar}}" alt="avatar" />
                             {{ form.avatar }}

@@ -148,6 +148,7 @@ button, html [type="button"], [type="reset"], [type="submit"] {
     margin-bottom: 10px;
     font-size: 18px;
     color: #586069;
+    background-color: #fff;
 }
 
 .commit-tease {
@@ -166,6 +167,17 @@ button, html [type="button"], [type="reset"], [type="submit"] {
 
 .d-flex {
     display: flex !important;
+}
+
+.file-wrap {
+    margin-bottom: 10px;
+    border: 1px solid #dfe2e5;
+    border-top-color: rgb(223, 226, 229);
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
 }
 
 table.files {
@@ -440,4 +452,424 @@ svg:not(:root) {
     display: inline-block;
     vertical-align: text-top;
     fill: currentColor;
+}
+
+
+.gh-header-actions {
+    float: right;
+    margin-top: 3px;
+}
+
+
+.text-normal {
+    font-weight: 400 !important;
+}
+
+.f5 {
+    font-size: 14px !important;
+}
+
+.timeline-comment-wrapper {
+    position: relative;
+    padding-left: 60px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    border-top: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.timeline-comment-header-text {
+    max-width: 78%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.timeline-comment-header .timestamp {
+    color: inherit;
+    white-space: nowrap;
+}
+
+.timeline-comment-header {
+    padding-right: 15px;
+    padding-left: 15px;
+    color: #586069;
+    background-color: #f6f8fa;
+    border-bottom: 1px solid #d1d5da;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.timeline-comment.current-user {
+    border-color: #c0d3eb;
+}
+
+.timeline-comment {
+    position: relative;
+    background-color: #fff;
+    border: 1px solid #d1d5da;
+    border-radius: 3px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.tooltipped {
+    position: relative;
+}
+
+.btnIS-link {
+    display: inline-block;
+    padding: 0;
+    font-size: inherit;
+    color: #0366d6;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.avatar {
+    display: inline-block;
+    overflow: hidden;
+    line-height: 1;
+    vertical-align: middle;
+    border-radius: 3px;
+}
+
+.rounded-1 {
+    border-radius: 3px !important;
+}
+
+img {
+    border-style: none;
+}
+
+.repohead.experiment-repo-nav {
+    padding-bottom: 0;
+    background-color: #fafbfc;
+}
+
+.float-right {
+    float: right !important;
+}
+
+.pagehead {
+    position: relative;
+    margin-top: -18px;
+    padding-top: 20px;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+}
+
+.btnIS {
+    position: relative;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-repeat: repeat-x;
+    background-position: -1px -1px;
+    background-size: 110% 110%;
+    border: 1px solid rgba(27,31,35,0.2);
+    border-radius: 0.25em;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.btnIS {
+    color: #24292e;
+    background-color: #eff3f6;
+    background-image: linear-gradient(-180deg, #fafbfc 0%, #eff3f6 90%);
+}
+
+.btnIS-primary {
+    color: #fff;
+    background-color: #28a745;
+    background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%);
+}
+
+.btnIS-with-count {
+    float: left;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.btnIS-sm {
+    padding: 3px 10px;
+    font-size: 12px;
+    line-height: 20px;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+.pagehead ul.pagehead-actions {
+    position: relative;
+    z-index: 31;
+    float: right;
+    margin: 0;
+    list-style: none;
+}
+
+.pagehead ul.pagehead-actions li {
+    display: inline-block;
+}
+
+.social-count {
+    float: left;
+    padding: 3px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #24292e;
+    vertical-align: middle;
+    background-color: #fff;
+    border: 1px solid rgba(27,31,35,0.2);
+    border-left: 0;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+    .social-count:hover {
+        color: #0366d6;
+        cursor: pointer;
+    }
+
+    .social-count:hover, .social-count:active {
+        text-decoration: none;
+    }
+
+a {
+    color: #0366d6;
+    text-decoration: none;
+}
+
+ul, ol {
+    padding-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.Counter {
+    display: inline-block;
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    color: #586069;
+    background-color: rgba(27,31,35,0.08);
+    border-radius: 20px;
+}
+
+.reponav-item .Counter {
+    color: #444d56;
+}
+
+b, strong {
+    font-weight: 600;
+}
+
+.repohead h1 {
+    position: relative;
+    float: left;
+    max-width: 635px;
+    padding-left: 18px;
+    font-size: 18px;
+    line-height: 26px;
+    color: #586069;
+}
+
+.pagehead h1 {
+    margin-top: 0;
+    margin-bottom: 0;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+h1 {
+    font-size: 32px;
+    font-weight: 600;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+.repohead .repohead-details-container {
+    margin-bottom: 0px;
+}
+
+.container {
+    width: 980px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.timeline-comment-action {
+    display: inline-block;
+    padding: 10px 5px;
+    color: inherit;
+    opacity: 0.5;
+}
+
+.timeline-comment-actions {
+    float: right;
+    margin-right: -5px;
+    margin-left: 10px;
+}
+
+.timeline-comment.current-user .timeline-comment-header {
+    background-color: #f1f8ff;
+    border-bottom-color: #c0d3eb;
+}
+
+.gh-header {
+    height: 35px;
+    width: 100%;
+    border-bottom: 1px solid #d1d5da;
+}
+
+.octicon {
+    vertical-align: text-bottom;
+}
+
+.octicon {
+    display: inline-block;
+    vertical-align: text-top;
+    fill: currentColor;
+}
+
+.repohead h1 .octicon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 5px;
+    color: #959da5;
+}
+
+.timeline-comment-avatar {
+    float: left;
+    margin-left: -60px;
+    border-radius: 3px;
+}
+
+.avatar-parent-child {
+    position: relative;
+}
+
+.container {
+    width: 980px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.comment-body {
+    width: 100%;
+    padding: 15px;
+    overflow: visible;
+    font-size: 14px;
+}
+
+.d-block {
+    display: block !important;
+}
+
+.previewable-comment-form {
+    position: relative;
+}
+
+.tabnav {
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #d1d5da;
+}
+
+.previewable-comment-form .tabnav {
+    position: relative;
+    padding: 8px 8px 0;
+}
+
+.timeline-new-comment .comment-form-head {
+    margin-bottom: 10px;
+    padding: 6px 10px 0;
+    background: #f6f8fa;
+    border-radius: 3px 3px 0 0;
+}
+
+.tabnav-tabs {
+    margin-bottom: -1px;
+}
+
+.tabnav-tab:hover, .tabnav-tab:focus {
+    color: #24292e;
+    text-decoration: none;
+}
+
+.tabnav-tab.selected {
+    color: #24292e;
+    background-color: #fff;
+    border-color: #d1d5da;
+    border-radius: 3px 3px 0 0;
+}
+
+.tabnav-tab {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #586069;
+    text-decoration: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-bottom: 0;
+}
+
+.previewable-comment-form.write-selected .write-content, .previewable-comment-form.preview-selected .preview-content {
+    display: block;
+}
+
+.previewable-comment-form .write-content, .previewable-comment-form .preview-content {
+    display: none;
+    margin: 0 8px 8px;
+}
+
+.write-content {
+    position: relative;
+}
+
+.previewable-comment-form .comment-form-error {
+    margin-bottom: 8px;
+}
+
+.comment-form-error.comment-form-bottom, .comment-form-stale.comment-form-bottom {
+    margin-bottom: 10px;
+}
+
+.inline-comment-form .form-actions, .timeline-new-comment .form-actions {
+    padding: 0 10px 25px;
 }

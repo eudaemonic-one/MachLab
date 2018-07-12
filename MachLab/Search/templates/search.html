@@ -20,7 +20,9 @@
                 <div class="column three-fourths codesearch-results">
                     <div class="pl-2">
                         <div class="d-flex flex-justify-between border-bottom pb-3">
-                            {% if type == 'Models' %}
+                            {% if type == 'RankingList' %}
+                                <h3>Ranking List : Top {{n_top}} Popular Models</h3>
+                            {% elif type == 'Models' %}
                                 <h3>{{result_model_count}} model results</h3>
                             {% elif type == 'Modelfiles' %}
                                 <h3><span class="d-inline-block v-align-middle">Showing {{result_modelfile_count}} available file results</span></h3>
@@ -31,7 +33,7 @@
                             {% endif %}
                         </div>
                         
-                        {% if type == '' or type == 'Models' %}
+                        {% if type == '' or type == 'Models' or type == 'RankingList' %}
                         <ul class="repo-list">
                             {% for model in models %}
                             <div class="repo-list-item d-flex flex-justify-start py-4 public source">
@@ -52,7 +54,7 @@
                                 </div>
 
                                 <div class="d-table-cell col-2 text-gray pt-2">
-                                    <span class="repo-language-color ml-0" style="background-color:#f1e05a;"></span>
+                                    <span class="repo-language-color ml-0" style="background-color:{{model.icon_color}}"></span>
                                     {{model.model_type}}
                                 </div>
 
@@ -82,7 +84,7 @@
                                     <a href="/{{modelfile.model.user.username}}"><img class="avatar d-inline-block mr-2" src="/static/media/{{modelfile.model.user.userinfo.avatar}}" alt="@{{modelfile.model.user.username}}" width="32" height="32"></a>
 
                                     <div class="d-inline-block col-10">
-                                        <a class="text-bold" href="/models/{{modelfile.model.user.username}}/{{modelfile.model.model_name}}">{{modelfile.model.user.username}}/{{modelfile.model.model_name}}</a>
+                                        <a class="text-bold" href="/models/{{modelfile.model.user.username}}/{{modelfile.model.model_name}}/">{{modelfile.model.user.username}}/{{modelfile.model.model_name}}</a>
                                         –
                                         <a title="{{modelfile.filename}}" href="/models/{{modelfile.model.user.username}}/{{modelfile.model.model_name}}/{{modelfile.filename}}">{{modelfile.filename}}</a>
                                         <div class="mb-2">

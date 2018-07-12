@@ -9,7 +9,7 @@
           	    <div class="navbar-collapse collapse">
           	        <ul class="nav navbar-nav navbar-left">
           	            <li><a id="nav-docs" href="{% url 'docs' %}">Docs</a></li>
-          	            <li><a id="nav-updates" href="{% url 'culling' %}">Models</a></li>
+          	            <li><a id="nav-updates" href="{% url 'ranking-list' %}">Models</a></li>
           	            <li><a id="nav-faqs" href="{% url 'faq' %}">FAQ</a></li>
           	            <!--<li class="search visible-xs"><a href="/search">Search</a></li>-->
           	        </ul>
@@ -21,7 +21,7 @@
           	                        <input name="q" class="search-box form-control" placeholder="Search Models" type="text">
           	                        <input name="type" value="" type="hidden">
           	                        <span class="input-group-btn">
-          	                            <button tabindex="0" class="btn" type="submit" aria-label="Search">
+          	                            <button tabindex="0" class="" type="submit" aria-label="Search">
           	                                    <img class="search-icon" src="/static/icons/search.svg" alt="Search" width="16px" height="16px">
           	                            </button>
           	                        </span>
@@ -30,7 +30,7 @@
                         </li>
           	            <!-- this was hiden in the home and download page, keeping it for now -->
           	            <li>
-                            <a itemprop="downloadUrl" class="link-button" href="/download" id="nav-download">
+                            <a itemprop="downloadUrl" class="link-button" href="{% url 'download' %}" id="nav-download">
                                 <img class="download-icon" src="/static/icons/download.svg" alt="Download Mach Lab" width="16px" height="16px">
                                 <span class="hidden-sm">Download</span>
                             </a>

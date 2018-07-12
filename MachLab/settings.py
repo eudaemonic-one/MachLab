@@ -28,7 +28,7 @@ SECRET_KEY = '0e1d1b18-db20-4df9-82a2-983a643e4596'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','192.168.1.102']
 
 
 # Application definition
@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'MachLab',
     'Docs',
     'Account',
-    'UserProfile',
     'Models',
     'Search',
 ]
@@ -118,7 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
